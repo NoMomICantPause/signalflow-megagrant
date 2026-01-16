@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignalFlow Project - Dashboard Interactivo</title>
+    <title>SignalFlow Project - Interactive Dashboard</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         * {
@@ -24,7 +25,6 @@
             padding: 20px;
             backdrop-filter: blur(10px);
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .header h1 {
@@ -38,7 +38,6 @@
         .controls {
             padding: 20px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -74,7 +73,6 @@
             border-radius: 25px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
-            placeholder-color: rgba(255, 255, 255, 0.7);
         }
 
         .search-box::placeholder {
@@ -83,10 +81,99 @@
 
         .dashboard {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 280px 1fr;
             gap: 20px;
             padding: 20px;
             height: calc(100vh - 200px);
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-height: 0;
+        }
+
+        .detail-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(10, 15, 30, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .detail-panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-icon {
+            font-size: 1.5rem;
+        }
+
+        .detail-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+
+        .detail-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .detail-code {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 0.75rem;
+            color: #f0f6fc;
+            white-space: pre;
+            overflow-x: auto;
+            display: none;
+        }
+
+        .detail-code.visible {
+            display: block;
+        }
+
+        .detail-code .keyword {
+            color: #ff7b72;
+        }
+
+        .detail-code .comment {
+            color: #8b949e;
+        }
+
+        .detail-code .string {
+            color: #a5d6ff;
+        }
+
+        .detail-code .type {
+            color: #79c0ff;
         }
 
         .sidebar {
@@ -99,10 +186,14 @@
 
         .visualization {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
             border-radius: 15px;
+            flex: 1;
+            min-height: 400px;
             position: relative;
-            overflow: hidden;
+        }
+
+        .visualization:active {
+            cursor: grabbing;
         }
 
         .module-section {
@@ -134,11 +225,6 @@
         .file-item:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateX(5px);
-        }
-
-        .file-item.selected {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
         }
 
         .file-type {
@@ -213,24 +299,31 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>🚀 SignalFlow Project Dashboard</h1>
-        <p>Mapa mental interactivo del sistema de señales reactivo enterprise-grade</p>
+        <p>Interactive view of the production-ready reactive framework - 129 headers, 37 tests, 8 benchmarks</p>
     </div>
 
     <div class="controls">
         <div class="filter-group">
-            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="core">Core</button>
             <button class="filter-btn" data-filter="signals">Signals</button>
-            <button class="filter-btn" data-filter="registry">Registry</button>
-            <button class="filter-btn" data-filter="storage">Storage</button>
+            <button class="filter-btn" data-filter="operators">Operators</button>
+            <button class="filter-btn" data-filter="queries">Queries</button>
+            <button class="filter-btn" data-filter="targeting">Targeting</button>
+            <button class="filter-btn" data-filter="gas">GAS</button>
             <button class="filter-btn" data-filter="replication">Replication</button>
-            <button class="filter-btn" data-filter="security">Security</button>
+            <button class="filter-btn" data-filter="spatial">Spatial</button>
+            <button class="filter-btn" data-filter="bridges">Bridges</button>
+            <button class="filter-btn" data-filter="audio">Audio</button>
+            <button class="filter-btn" data-filter="binding">UI</button>
+            <button class="filter-btn" data-filter="blueprint">Blueprint</button>
             <button class="filter-btn" data-filter="tests">Tests</button>
         </div>
-        <input type="text" class="search-box" placeholder="Buscar archivos..." id="searchBox">
+        <input type="text" class="search-box" placeholder="Search files..." id="searchBox">
     </div>
 
     <div class="dashboard">
@@ -238,7 +331,7 @@
             <div class="stats">
                 <div class="stat">
                     <div class="stat-number" id="totalFiles">0</div>
-                    <div class="stat-label">Archivos Total</div>
+                    <div class="stat-label">Total Files</div>
                 </div>
                 <div class="stat">
                     <div class="stat-number" id="headerFiles">0</div>
@@ -249,169 +342,215 @@
                     <div class="stat-label">Sources (.cpp)</div>
                 </div>
             </div>
-
             <div id="fileTree"></div>
         </div>
-
         <div class="visualization">
             <svg class="dependency-graph"></svg>
             <div class="tooltip"></div>
         </div>
     </div>
 
+    <!-- Floating detail panel -->
+    <div class="detail-panel" id="detailPanel">
+        <div class="detail-header">
+            <span class="detail-icon">📄</span>
+            <span class="detail-title" id="detailTitle">Hover over a file</span>
+        </div>
+        <div class="detail-description" id="detailDescription"></div>
+        <div class="detail-code" id="detailCode"></div>
+    </div>
+
     <script>
-        // Datos del proyecto SignalFlow
+        // REAL project data from SignalFlowLite codebase
         const projectData = {
             core: {
                 name: "Core System",
                 color: "#ff6b6b",
                 files: [
-                    { name: "Signal.h", type: "h", description: "Descriptor puro para señales con almacenamiento basado en arquetipos" },
-                    { name: "SignalTypes.h", type: "h", description: "Sistema de tipos fundamental y conceptos C++20" },
-                    { name: "SignalConcepts.h", type: "h", description: "Conceptos C++20 para validación de tipos en tiempo de compilación" },
-                    { name: "SignalLocation.h", type: "h", description: "Sistema de ubicación espacial para señales" },
-                    { name: "SignalWatcher.h", type: "h", description: "Observador de cambios en señales" },
-                    { name: "DependentSignal.h", type: "h", description: "Señales que dependen de otras señales" },
-                    { name: "MergedObservable.h", type: "h", description: "Combinación de múltiples observables" },
-                    { name: "PreviousSignalKey.h", type: "h", description: "Clave para acceder a valores previos de señales" },
-                    { name: "TypeTraits.h", type: "h", description: "Características de tipo para el sistema" }
-                ]
-            },
-            signals: {
-                name: "Signal Types & Behaviors",
-                color: "#4ecdc4",
-                files: [
-                    { name: "MutableSignal.h", type: "h", description: "Señales mutables con estado modificable" },
-                    { name: "Computed.h", type: "h", description: "Señales computadas a partir de otras señales" },
-                    { name: "DynamicComputedSignal.h", type: "h", description: "Señales computadas dinámicamente" },
-                    { name: "FoldSignal.h", type: "h", description: "Acumulación de valores a lo largo del tiempo" },
-                    { name: "LerpSignal.h", type: "h", description: "Interpolación lineal entre valores" },
-                    { name: "SmoothSignal.h", type: "h", description: "Suavizado de valores con filtros" },
-                    { name: "ThrottleSignal.h", type: "h", description: "Control de frecuencia de actualización" },
-                    { name: "WatchSignal.h", type: "h", description: "Observación de cambios con callbacks" },
-                    { name: "StoreSignal.h", type: "h", description: "Almacenamiento persistente de valores" },
-                    { name: "PeekSignal.h", type: "h", description: "Acceso de solo lectura sin suscripción" },
-                    { name: "PreviousSignal.h", type: "h", description: "Acceso a valores previos de señales" }
-                ]
-            },
-            behaviors: {
-                name: "Signal Behaviors",
-                color: "#95e1d3",
-                files: [
-                    { name: "SignalBehavior.h", type: "h", description: "Comportamiento base para todas las señales" },
-                    { name: "MutableSignalBehavior.h", type: "h", description: "Comportamiento de señales mutables" },
-                    { name: "DynamicComputedSignalBehavior.h", type: "h", description: "Comportamiento de señales computadas dinámicas" },
-                    { name: "FoldSignalBehavior.h", type: "h", description: "Comportamiento de acumulación" },
-                    { name: "LerpSignalBehavior.h", type: "h", description: "Comportamiento de interpolación" },
-                    { name: "SmoothSignalBehavior.h", type: "h", description: "Comportamiento de suavizado" },
-                    { name: "ThrottleSignalBehavior.h", type: "h", description: "Comportamiento de throttling" },
-                    { name: "CacheSignalBehavior.h", type: "h", description: "Comportamiento de caché" },
-                    { name: "StoreSignalBehavior.h", type: "h", description: "Comportamiento de almacenamiento" },
-                    { name: "PeekSignalBehavior.h", type: "h", description: "Comportamiento de peek" },
-                    { name: "PreviousSignalBehavior.h", type: "h", description: "Comportamiento de valores previos" }
-                ]
-            },
-            operators: {
-                name: "Signal Operators",
-                color: "#a8e6cf",
-                files: [
-                    { name: "SignalOperators.h", type: "h", description: "Operadores principales para señales" },
-                    { name: "ArithmeticOperators.h", type: "h", description: "Operadores aritméticos (+, -, *, /)" },
-                    { name: "ComparisonOperators.h", type: "h", description: "Operadores de comparación (==, !=, <, >)" },
-                    { name: "LogicalOperators.h", type: "h", description: "Operadores lógicos (&&, ||, !)" },
-                    { name: "ConditionalOperators.h", type: "h", description: "Operadores condicionales (if/else)" },
-                    { name: "MutableOperators.h", type: "h", description: "Operadores para señales mutables" },
-                    { name: "CoreOperators.h", type: "h", description: "Operadores fundamentales del sistema" }
-                ]
-            },
-            registry: {
-                name: "Registry & Management",
-                color: "#ffd93d",
-                files: [
-                    { name: "SignalRegistrySubsystem.h", type: "h", description: "Subsistema de registro para gestión de ciclo de vida" },
-                    { name: "SignalRegistry.cpp", type: "cpp", description: "Implementación del registro central de señales" },
-                    { name: "SignalTimerManagerSubsystem.h", type: "h", description: "Gestión de temporizadores para señales" },
-                    { name: "SignalTimerSubsystem.h", type: "h", description: "Subsistema de temporizadores" },
-                    { name: "SignalIterators.h", type: "h", description: "Iteradores para recorrer señales" },
-                    { name: "SignalIntegrityChecker.h", type: "h", description: "Verificación de integridad del sistema" }
+                    { name: "SignalDescriptor.h", type: "h", description: "FSignalHandle 128-bit cache-aligned handle" },
+                    { name: "SignalKey.h", type: "h", description: "Unique signal identifiers with hashing" },
+                    { name: "SignalTypes.h", type: "h", description: "Core type definitions and concepts" },
+                    { name: "SignalTypeRegistry.h", type: "h", description: "Runtime type dispatch with arithmetic ops" },
+                    { name: "SignalFlowLog.h", type: "h", description: "Logging categories for debugging" },
+                    { name: "SignalFlowStats.h", type: "h", description: "STAT profiling integration" },
+                    { name: "SignalDependencyTracker.h", type: "h", description: "Dependency graph tracking" },
+                    { name: "SignalExceptions.h", type: "h", description: "Exception types for error handling" }
                 ]
             },
             storage: {
-                name: "Storage System",
+                name: "Storage Layer",
                 color: "#a8c8ec",
                 files: [
-                    { name: "RawSignalStorage.h", type: "h", description: "Almacenamiento de bajo nivel para señales" },
-                    { name: "RawSignalChunk.h", type: "h", description: "Chunks de memoria para almacenamiento eficiente" },
-                    { name: "RawSignalHandle.h", type: "h", description: "Handles para acceso a almacenamiento" },
-                    { name: "RawSignalValueStorage.h", type: "h", description: "Almacenamiento específico de valores" },
-                    { name: "SignalShardChunkPool.h", type: "h", description: "Pool de chunks para sharding de memoria" }
+                    { name: "RawSignalStorage.h", type: "h", description: "Type-erased value storage" },
+                    { name: "RawSignalChunk.h", type: "h", description: "Memory chunks for bulk storage" },
+                    { name: "SignalShard.h", type: "h", description: "Sharded storage for concurrency" },
+                    { name: "SignalShardManager.h", type: "h", description: "64-shard manager for lock-free access" },
+                    { name: "TransientValueStore.h", type: "h", description: "Temporary value caching" },
+                    { name: "TypedSignalStorage.h", type: "h", description: "Type-safe storage wrapper" },
+                    { name: "TArrayPool.h", type: "h", description: "Object pooling for allocations" }
+                ]
+            },
+            signals: {
+                name: "Signal Types",
+                color: "#4ecdc4",
+                files: [
+                    { name: "TSignal.h", type: "h", description: "Main typed signal template" },
+                    { name: "TSignalRef.h", type: "h", description: "Reference wrapper for signals" },
+                    { name: "SignalFactory.h", type: "h", description: "MakeSignal() factory functions" },
+                    { name: "MutableSignalFactory.h", type: "h", description: "Mutable signal creation" },
+                    { name: "SignalConcepts.h", type: "h", description: "C++20 concepts for type constraints" },
+                    { name: "SignalFlags.h", type: "h", description: "ESignalFlags for behaviors" },
+                    { name: "SignalBehaviorType.h", type: "h", description: "Behavior type enumeration" }
+                ]
+            },
+            operators: {
+                name: "Operators",
+                color: "#a8e6cf",
+                files: [
+                    { name: "ArithmeticOperators.h", type: "h", description: "Arithmetic: +, -, *, /" },
+                    { name: "ComparisonOperators.h", type: "h", description: "Comparison: ==, !=, <, >" },
+                    { name: "LogicalOperators.h", type: "h", description: "Logical: &&, ||, !" },
+                    { name: "TimeOperators.h", type: "h", description: "Smooth, Throttle, Debounce, Delay" },
+                    { name: "InputOperators.h", type: "h", description: "Map, Filter, Reduce" },
+                    { name: "PipeOperators.h", type: "h", description: "Pipe operator | for chaining" }
+                ]
+            },
+            gas: {
+                name: "GAS Integration",
+                color: "#8b5cf6",
+                files: [
+                    { name: "SignalAttribute.h", type: "h", description: "TSignalAttribute reactive attributes" },
+                    { name: "FSignalSet.h", type: "h", description: "Container for entity attributes" },
+                    { name: "TypeErasedEffectSpec.h", type: "h", description: "Type-erased effect specs" },
+                    { name: "TypeErasedEffectManager.h", type: "h", description: "Effect application logic" },
+                    { name: "TypeErasedModifier.h", type: "h", description: "Modifiers with stacking" },
+                    { name: "ExecutionCalc.h", type: "h", description: "Damage formula calculations" },
+                    { name: "EffectSpec.h", type: "h", description: "Typed effect specifications" },
+                    { name: "CollectionSignal.h", type: "h", description: "TArray/TMap reactive collections" },
+                    { name: "SignalGameplayCueManager.h", type: "h", description: "Gameplay cue integration" }
                 ]
             },
             replication: {
                 name: "Network Replication",
                 color: "#ff9ff3",
                 files: [
-                    { name: "SignalReplication.h", type: "h", description: "Sistema de replicación de red" },
-                    { name: "SignalReplicationManager.h", type: "h", description: "Gestión de replicación" },
-                    { name: "ReplicationSerialization.h", type: "h", description: "Serialización para replicación" },
-                    { name: "ReplicationHeader.h", type: "h", description: "Headers para paquetes de replicación" },
-                    { name: "SignalRelevancy.h", type: "h", description: "Relevancia de señales para replicación" }
+                    { name: "ASignalReplicationActor.h", type: "h", description: "Singleton replication actor" },
+                    { name: "SignalReplicationTypes.h", type: "h", description: "FReplicatedSignal struct" },
+                    { name: "FNetID.h", type: "h", description: "Deterministic network identifiers" },
+                    { name: "ReplicationPolicy.h", type: "h", description: "Per-signal replication rules" },
+                    { name: "SignalReplicationSettings.h", type: "h", description: "Runtime configuration" }
                 ]
             },
-            security: {
-                name: "Security & Anti-Cheat",
-                color: "#f38ba8",
+            spatial: {
+                name: "Spatial System",
+                color: "#f59e0b",
                 files: [
-                    { name: "AntiDebugging.h", type: "h", description: "Protección contra debugging" },
-                    { name: "UltraFastSecurity.cpp", type: "cpp", description: "Sistema de seguridad ultra-rápido" },
-                    { name: "IntegrityProtection.cpp", type: "cpp", description: "Protección de integridad" },
-                    { name: "TimeProtection.cpp", type: "cpp", description: "Protección contra manipulación de tiempo" },
-                    { name: "FSessionKeyManager.cpp", type: "cpp", description: "Gestión de claves de sesión" }
+                    { name: "SpatialOctreeManager.h", type: "h", description: "Octree for LOD queries" },
+                    { name: "SpatialQueryView.h", type: "h", description: "Range query results" },
+                    { name: "SpatialSignalComponent.h", type: "h", description: "Component for spatial signals" },
+                    { name: "SpatialTypes.h", type: "h", description: "Spatial type definitions" }
                 ]
             },
-            observers: {
-                name: "Observers & Queries",
-                color: "#94d3f0",
+            persistence: {
+                name: "Persistence",
+                color: "#10b981",
                 files: [
-                    { name: "SignalObservable.h", type: "h", description: "Observable base para señales" },
-                    { name: "ObserverPriority.h", type: "h", description: "Sistema de prioridades para observadores" },
-                    { name: "QueryView.h", type: "h", description: "Vistas de consulta para señales" },
-                    { name: "SpatialSensor.h", type: "h", description: "Sensor espacial para ubicaciones" }
+                    { name: "SignalPersistence.h", type: "h", description: "Save/Load with LZ4 + Delta + CRC32" },
+                    { name: "PersistencePolicy.h", type: "h", description: "Per-signal save configuration" },
+                    { name: "SignalSaveGame.h", type: "h", description: "SaveGame integration" }
+                ]
+            },
+            queries: {
+                name: "Signal Queries",
+                color: "#ec4899",
+                files: [
+                    { name: "SignalQuery.h", type: "h", description: "Fluent query builder for signals" },
+                    { name: "SignalQuery.inl", type: "h", description: "Inline query implementations" }
+                ]
+            },
+            targeting: {
+                name: "Targeting System",
+                color: "#14b8a6",
+                files: [
+                    { name: "TargetingQuery.h", type: "h", description: "Target selection with filters" },
+                    { name: "TargetingOperators.h", type: "h", description: "Distance, LOS, cone filters" },
+                    { name: "TargetingTypes.h", type: "h", description: "Targeting configuration types" }
+                ]
+            },
+            bridges: {
+                name: "Input Bridges",
+                color: "#f472b6",
+                files: [
+                    { name: "InputSignalBridge.h", type: "h", description: "Enhanced Input to Signal mapping" },
+                    { name: "AN_SignalTrigger.h", type: "h", description: "Animation Notify trigger" },
+                    { name: "AN_SignalWindow.h", type: "h", description: "Animation window events" }
+                ]
+            },
+            audio: {
+                name: "Audio Integration",
+                color: "#a855f7",
+                files: [
+                    { name: "MetasoundOperators.h", type: "h", description: "Metasound-to-Signal operators" },
+                    { name: "AudioOperators.h", type: "h", description: "RTPC, envelope, spectrum analysis" }
+                ]
+            },
+            binding: {
+                name: "UI Binding",
+                color: "#22d3ee",
+                files: [
+                    { name: "ISignalProvider.h", type: "h", description: "Signal provider interface" },
+                    { name: "SignalBindingSubsystem.h", type: "h", description: "Subsystem for widget binding" },
+                    { name: "SignalPropertyBridge.h", type: "h", description: "Property-to-signal bridging" },
+                    { name: "SignalWidgetExtension.h", type: "h", description: "UMG widget extension" }
+                ]
+            },
+            prediction: {
+                name: "Client Prediction",
+                color: "#facc15",
+                files: [
+                    { name: "SignalPrediction.h", type: "h", description: "Client-side prediction framework" }
+                ]
+            },
+            blueprint: {
+                name: "Blueprint Integration",
+                color: "#06b6d4",
+                files: [
+                    { name: "K2Node_CreateSignal.h", type: "h", description: "Create Signal node" },
+                    { name: "K2Node_GetSignalValue.h", type: "h", description: "Get Signal Value node" },
+                    { name: "K2Node_SetSignalValue.h", type: "h", description: "Set Signal Value node" },
+                    { name: "K2Node_WatchSignal.h", type: "h", description: "Watch Signal async node" },
+                    { name: "K2Node_SignalMath.h", type: "h", description: "Math operators node" },
+                    { name: "K2Node_GetAttribute.h", type: "h", description: "GAS Get Attribute" },
+                    { name: "K2Node_SetAttribute.h", type: "h", description: "GAS Set Attribute" },
+                    { name: "K2Node_ApplyEffect.h", type: "h", description: "GAS Apply Effect" },
+                    { name: "BPSignalTypes.h", type: "h", description: "Blueprint-exposed types" }
                 ]
             },
             tests: {
                 name: "Test Suite",
                 color: "#c9a96e",
                 files: [
-                    { name: "ConstantSignalLifecycleTest.cpp", type: "cpp", description: "Tests de ciclo de vida de señales constantes" },
-                    { name: "MutableSignalLifecycleTest.cpp", type: "cpp", description: "Tests de ciclo de vida de señales mutables" },
-                    { name: "ComputedSignalLifecycleTest.cpp", type: "cpp", description: "Tests de señales computadas" },
-                    { name: "DynamicComputedSignalLifecycleTest.cpp", type: "cpp", description: "Tests de señales computadas dinámicas" },
-                    { name: "MutableComputedSignalLifecycleTest.cpp", type: "cpp", description: "Tests de señales computadas mutables" },
-                    { name: "PredictedSignalLifecycleTest.cpp", type: "cpp", description: "Tests de señales predictivas" },
-                    { name: "DebounceSignalLifecycleTest.cpp", type: "cpp", description: "Tests de debounce" },
-                    { name: "SignalTimerTest.cpp", type: "cpp", description: "Tests del sistema de temporizadores" },
-                    { name: "DependencyTrackingTest.cpp", type: "cpp", description: "Tests de seguimiento de dependencias" }
-                ]
-            },
-            utils: {
-                name: "Utilities",
-                color: "#b4a7d6",
-                files: [
-                    { name: "BufferPool.h", type: "h", description: "Pool de buffers para optimización de memoria" },
-                    { name: "CircularBuffer.h", type: "h", description: "Buffer circular para datos temporales" },
-                    { name: "SignalTypeHash.cpp", type: "cpp", description: "Hash de tipos para identificación rápida" }
+                    { name: "SignalCoreTests.cpp", type: "cpp", description: "Core signal lifecycle tests" },
+                    { name: "OperatorTests.cpp", type: "cpp", description: "Operator functionality tests" },
+                    { name: "ReplicationTests.cpp", type: "cpp", description: "Network replication tests" },
+                    { name: "SpatialTests.cpp", type: "cpp", description: "Octree query tests" },
+                    { name: "GASTests.cpp", type: "cpp", description: "Effect system tests" },
+                    { name: "PersistenceTests.cpp", type: "cpp", description: "Save/Load tests" },
+                    { name: "QueryTests.cpp", type: "cpp", description: "Signal query tests" },
+                    { name: "TargetingTests.cpp", type: "cpp", description: "Target selection tests" },
+                    { name: "Benchmark_Core.cpp", type: "cpp", description: "Signal creation 100K benchmark" },
+                    { name: "Benchmark_GAS.cpp", type: "cpp", description: "Effect application benchmark" },
+                    { name: "Benchmark_Spatial.cpp", type: "cpp", description: "Octree query benchmark" },
+                    { name: "Benchmark_Queries.cpp", type: "cpp", description: "Query performance benchmark" },
+                    { name: "Benchmark_TargetingCalc.cpp", type: "cpp", description: "Targeting calculation benchmark" }
                 ]
             }
         };
 
-        // Variables globales
         let currentFilter = 'all';
-        let selectedFile = null;
         let searchTerm = '';
 
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeFilters();
             initializeSearch();
             renderFileTree();
@@ -420,10 +559,9 @@
         });
 
         function initializeFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    filterButtons.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     currentFilter = this.dataset.filter;
                     renderFileTree();
@@ -434,8 +572,7 @@
         }
 
         function initializeSearch() {
-            const searchBox = document.getElementById('searchBox');
-            searchBox.addEventListener('input', function() {
+            document.getElementById('searchBox').addEventListener('input', function () {
                 searchTerm = this.value.toLowerCase();
                 renderFileTree();
                 renderVisualization();
@@ -444,26 +581,20 @@
         }
 
         function getFilteredData() {
-            if (currentFilter === 'all') {
-                return projectData;
-            }
+            if (currentFilter === 'all') return projectData;
             const filtered = {};
-            if (projectData[currentFilter]) {
-                filtered[currentFilter] = projectData[currentFilter];
-            }
+            if (projectData[currentFilter]) filtered[currentFilter] = projectData[currentFilter];
             return filtered;
         }
 
         function matchesSearch(file) {
             if (!searchTerm) return true;
-            return file.name.toLowerCase().includes(searchTerm) ||
-                   file.description.toLowerCase().includes(searchTerm);
+            return file.name.toLowerCase().includes(searchTerm) || file.description.toLowerCase().includes(searchTerm);
         }
 
         function renderFileTree() {
             const fileTree = document.getElementById('fileTree');
             const data = getFilteredData();
-
             fileTree.innerHTML = '';
 
             Object.entries(data).forEach(([key, module]) => {
@@ -477,49 +608,31 @@
                 section.appendChild(title);
 
                 const filteredFiles = module.files.filter(matchesSearch);
-
                 filteredFiles.forEach(file => {
                     const fileItem = document.createElement('div');
                     fileItem.className = 'file-item';
-                    fileItem.innerHTML = `
-                        <span class="file-type">${file.type}</span>
-                        ${file.name}
-                    `;
-                    fileItem.addEventListener('click', () => selectFile(file, module));
+                    fileItem.innerHTML = `<span class="file-type">${file.type}</span>${file.name}`;
+
+                    // Add hover handler for detail panel
+                    fileItem.addEventListener('mouseenter', () => showFileDetails(file, module));
+                    fileItem.addEventListener('mouseleave', hideDetails);
+
                     section.appendChild(fileItem);
                 });
 
-                if (filteredFiles.length > 0) {
-                    fileTree.appendChild(section);
-                }
+                if (filteredFiles.length > 0) fileTree.appendChild(section);
             });
-        }
-
-        function selectFile(file, module) {
-            // Remover selección previa
-            document.querySelectorAll('.file-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-
-            // Seleccionar nuevo archivo
-            event.currentTarget.classList.add('selected');
-            selectedFile = { file, module };
-
-            // Actualizar visualización
-            highlightNode(file.name);
         }
 
         function updateStats() {
             const data = getFilteredData();
             let totalFiles = 0, headerFiles = 0, sourceFiles = 0;
-
             Object.values(data).forEach(module => {
-                const filteredFiles = module.files.filter(matchesSearch);
-                totalFiles += filteredFiles.length;
-                headerFiles += filteredFiles.filter(f => f.type === 'h').length;
-                sourceFiles += filteredFiles.filter(f => f.type === 'cpp').length;
+                const filtered = module.files.filter(matchesSearch);
+                totalFiles += filtered.length;
+                headerFiles += filtered.filter(f => f.type === 'h').length;
+                sourceFiles += filtered.filter(f => f.type === 'cpp').length;
             });
-
             document.getElementById('totalFiles').textContent = totalFiles;
             document.getElementById('headerFiles').textContent = headerFiles;
             document.getElementById('sourceFiles').textContent = sourceFiles;
@@ -528,184 +641,115 @@
         function renderVisualization() {
             const svg = d3.select('.dependency-graph');
             svg.selectAll("*").remove();
-
             const width = svg.node().clientWidth;
             const height = svg.node().clientHeight;
-
             const data = getFilteredData();
             const nodes = [];
             const links = [];
 
-            // Crear nodos
-            Object.entries(data).forEach(([key, module], moduleIndex) => {
+            Object.entries(data).forEach(([key, module]) => {
                 const filteredFiles = module.files.filter(matchesSearch);
-
-                // Nodo del módulo
-                nodes.push({
-                    id: key,
-                    name: module.name,
-                    type: 'module',
-                    color: module.color,
-                    size: 20,
-                    files: filteredFiles.length
-                });
-
-                // Nodos de archivos
-                filteredFiles.forEach((file, fileIndex) => {
+                nodes.push({ id: key, name: module.name, type: 'module', color: module.color, size: 20, files: filteredFiles.length });
+                filteredFiles.forEach(file => {
                     const nodeId = `${key}_${file.name}`;
-                    nodes.push({
-                        id: nodeId,
-                        name: file.name,
-                        type: 'file',
-                        fileType: file.type,
-                        color: file.type === 'h' ? '#4ecdc4' : '#ff6b6b',
-                        size: 8,
-                        description: file.description,
-                        module: key
-                    });
-
-                    // Link del módulo al archivo
-                    links.push({
-                        source: key,
-                        target: nodeId
-                    });
+                    nodes.push({ id: nodeId, name: file.name, type: 'file', color: file.type === 'h' ? '#4ecdc4' : '#ff6b6b', size: 8, description: file.description });
+                    links.push({ source: key, target: nodeId });
                 });
             });
 
-            // Crear links entre módulos relacionados
-            const moduleKeys = Object.keys(data);
-            const dependencies = {
-                'core': ['signals', 'registry', 'storage'],
-                'signals': ['behaviors', 'operators'],
-                'registry': ['storage', 'security'],
-                'replication': ['security', 'storage'],
-                'tests': ['core', 'signals', 'registry', 'storage']
-            };
-
-            moduleKeys.forEach(source => {
-                if (dependencies[source]) {
-                    dependencies[source].forEach(target => {
-                        if (moduleKeys.includes(target)) {
-                            links.push({
-                                source: source,
-                                target: target,
-                                type: 'dependency'
-                            });
-                        }
-                    });
-                }
+            const deps = { 'core': ['storage', 'signals'], 'signals': ['operators'], 'gas': ['signals', 'core'], 'replication': ['core'], 'spatial': ['core'], 'blueprint': ['signals', 'gas'] };
+            Object.keys(data).forEach(src => {
+                if (deps[src]) deps[src].forEach(tgt => { if (data[tgt]) links.push({ source: src, target: tgt, type: 'dep' }); });
             });
 
-            // Configurar simulación de fuerza
             const simulation = d3.forceSimulation(nodes)
                 .force('link', d3.forceLink(links).id(d => d.id).distance(100))
                 .force('charge', d3.forceManyBody().strength(-300))
                 .force('center', d3.forceCenter(width / 2, height / 2))
                 .force('collision', d3.forceCollide().radius(d => d.size + 5));
 
-            // Crear enlaces
-            const link = svg.append('g')
-                .selectAll('line')
-                .data(links)
-                .enter().append('line')
+            const link = svg.append('g').selectAll('line').data(links).enter().append('line')
                 .attr('class', 'link')
-                .attr('stroke', d => d.type === 'dependency' ? '#ffd93d' : 'rgba(255,255,255,0.3)')
-                .attr('stroke-width', d => d.type === 'dependency' ? 2 : 1);
+                .attr('stroke', d => d.type === 'dep' ? '#ffd93d' : 'rgba(255,255,255,0.3)')
+                .attr('stroke-width', d => d.type === 'dep' ? 2 : 1);
 
-            // Crear nodos
-            const node = svg.append('g')
-                .selectAll('circle')
-                .data(nodes)
-                .enter().append('circle')
-                .attr('class', 'node')
-                .attr('r', d => d.size)
-                .attr('fill', d => d.color)
-                .attr('stroke', '#fff')
-                .attr('stroke-width', 2)
-                .call(d3.drag()
-                    .on('start', dragstarted)
-                    .on('drag', dragged)
-                    .on('end', dragended));
+            const node = svg.append('g').selectAll('circle').data(nodes).enter().append('circle')
+                .attr('class', 'node').attr('r', d => d.size).attr('fill', d => d.color)
+                .attr('stroke', '#fff').attr('stroke-width', 2)
+                .call(d3.drag().on('start', (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+                    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+                    .on('end', (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }));
 
-            // Etiquetas
-            const labels = svg.append('g')
-                .selectAll('text')
-                .data(nodes)
-                .enter().append('text')
-                .attr('class', 'node-label')
-                .attr('dy', d => d.size + 15)
-                .style('font-size', d => d.type === 'module' ? '12px' : '9px')
+            const labels = svg.append('g').selectAll('text').data(nodes).enter().append('text')
+                .attr('class', 'node-label').attr('dy', d => d.size + 12)
+                .style('font-size', d => d.type === 'module' ? '11px' : '8px')
                 .style('font-weight', d => d.type === 'module' ? 'bold' : 'normal')
                 .text(d => d.name);
 
-            // Tooltip
             const tooltip = d3.select('.tooltip');
+            node.on('mouseover', (e, d) => { tooltip.transition().duration(200).style('opacity', .9); tooltip.html(`<strong>${d.name}</strong><br/>${d.description || d.files + ' files'}`).style('left', (e.pageX + 10) + 'px').style('top', (e.pageY - 28) + 'px'); })
+                .on('mouseout', () => tooltip.transition().duration(500).style('opacity', 0));
 
-            node
-                .on('mouseover', function(event, d) {
-                    tooltip.transition().duration(200).style('opacity', .9);
-                    tooltip.html(`
-                        <strong>${d.name}</strong><br/>
-                        ${d.type === 'file' ? `Tipo: ${d.fileType}<br/>` : ''}
-                        ${d.description || (d.type === 'module' ? `${d.files} archivos` : '')}
-                    `)
-                    .style('left', (event.pageX + 10) + 'px')
-                    .style('top', (event.pageY - 28) + 'px');
-                })
-                .on('mouseout', function(d) {
-                    tooltip.transition().duration(500).style('opacity', 0);
-                })
-                .on('click', function(event, d) {
-                    if (d.type === 'file') {
-                        highlightNode(d.name);
-                    }
-                });
-
-            // Actualizar posiciones
             simulation.on('tick', () => {
-                link
-                    .attr('x1', d => d.source.x)
-                    .attr('y1', d => d.source.y)
-                    .attr('x2', d => d.target.x)
-                    .attr('y2', d => d.target.y);
-
-                node
-                    .attr('cx', d => d.x)
-                    .attr('cy', d => d.y);
-
-                labels
-                    .attr('x', d => d.x)
-                    .attr('y', d => d.y);
+                link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+                node.attr('cx', d => d.x).attr('cy', d => d.y);
+                labels.attr('x', d => d.x).attr('y', d => d.y);
             });
-
-            function dragstarted(event, d) {
-                if (!event.active) simulation.alphaTarget(0.3).restart();
-                d.fx = d.x;
-                d.fy = d.y;
-            }
-
-            function dragged(event, d) {
-                d.fx = event.x;
-                d.fy = event.y;
-            }
-
-            function dragended(event, d) {
-                if (!event.active) simulation.alphaTarget(0);
-                d.fx = null;
-                d.fy = null;
-            }
         }
 
-        function highlightNode(fileName) {
-            d3.selectAll('.node')
-                .attr('stroke-width', d => d.name === fileName ? 4 : 2)
-                .attr('stroke', d => d.name === fileName ? '#ffd93d' : '#fff');
+        window.addEventListener('resize', renderVisualization);
+
+        // Extended file descriptions with code examples
+        const fileDetails = {
+            'SignalDescriptor.h': { desc: 'Core 128-bit cache-aligned signal handle. Contains TypeHash, Flags, and raw storage pointer.', code: 'FSignalHandle Handle;\nHandle.TypeHash; // Runtime type info\nHandle.Flags;    // ESignalFlags bitmask' },
+            'SignalKey.h': { desc: 'Unique signal identifiers with compile-time hashing for O(1) lookups.', code: 'FSignalKey Key("Player.Health");\nbool eq = Key == Other; // Hash comparison' },
+            'SignalTypeRegistry.h': { desc: 'Type-erased registry with arithmetic operators for any registered type.', code: 'Registry.Add(TypeHash, BytesA, BytesB);\nRegistry.Multiply(TypeHash, Bytes, Scalar);' },
+            'MakeSignal.h': { desc: 'Factory functions for creating signals with different behaviors.', code: 'auto Health = MakeSignal(100.0f);\nauto Computed = Computed([](float h) {\n  return h / 100.0f;\n}, Health);' },
+            'ArithmeticOperators.h': { desc: 'Operator overloads for signal arithmetic: +, -, *, /.', code: 'auto Sum = SignalA + SignalB;\nauto Scaled = Signal * 2.0f;' },
+            'PipeOperators.h': { desc: 'Pipe operator | for fluent chaining of signal transformations.', code: 'auto Result = Input\n  | Clamp(0, 100)\n  | Map([](auto v) { return v * 2; })\n  | Debounce(0.3f);' },
+            'TimeOperators.h': { desc: 'Time-based operators: Delay, Debounce, Throttle, Smooth.', code: 'auto Delayed = Signal | Delay(1.0f);\nauto Smooth = Signal | Smooth(0.1f);' },
+            'TypeErasedEffectSpec.h': { desc: 'Type-erased GAS effect specification with builder pattern.', code: 'FEffectSpec Spec = FEffectSpec::Make()\n  .WithDuration(5.0f)\n  .WithAdditive(DamageType, 10.0f);' },
+            'TypeErasedEffectManager.h': { desc: 'Manages active effects, handles stacking policies and reapplication.', code: 'Manager.ApplyEffect(Target, Spec);\nManager.RemoveEffect(Handle);' },
+            'SignalReplicationTypes.h': { desc: 'Network-aware signal types with automatic delta compression.', code: 'auto Health = MakeSignal(100.0f,\n  "Player.Health", ESignalFlags::Replicated);' },
+        };
+
+        function showFileDetails(file, module) {
+            const panel = document.getElementById('detailPanel');
+            const title = document.getElementById('detailTitle');
+            const desc = document.getElementById('detailDescription');
+            const code = document.getElementById('detailCode');
+
+            title.textContent = file.name;
+            title.style.color = module.color;
+
+            const details = fileDetails[file.name];
+            if (details) {
+                desc.textContent = details.desc;
+                code.textContent = details.code;
+                code.classList.add('visible');
+            } else {
+                desc.textContent = file.description;
+                code.classList.remove('visible');
+            }
+
+            panel.classList.add('visible');
         }
 
-        // Responsive
-        window.addEventListener('resize', () => {
-            renderVisualization();
+        function hideDetails() {
+            // Small delay to prevent flicker
+            setTimeout(() => {
+                const panel = document.getElementById('detailPanel');
+                if (!panel.matches(':hover')) {
+                    panel.classList.remove('visible');
+                }
+            }, 100);
+        }
+
+        // Keep panel visible while hovering over it
+        document.getElementById('detailPanel').addEventListener('mouseleave', () => {
+            document.getElementById('detailPanel').classList.remove('visible');
         });
     </script>
 </body>
+
 </html>
