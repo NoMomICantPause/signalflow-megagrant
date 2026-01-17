@@ -1427,30 +1427,27 @@
                                 style="background: rgba(239, 68, 68, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">~45
                                 lines</span>
                         </h4>
-                        <div class="code-snippet" style="font-size: 0.7rem;"><span class="code-comment">// Header
-                                file</span>
-                            DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-                            FOnHealthChanged, <span class="code-keyword">float</span>, NewHealth);
+                        <div class="code-snippet" style="font-size: 0.7rem;"><span class="code-comment">// Header file</span>
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
+    FOnHealthChanged, <span class="code-keyword">float</span>, NewHealth);
 
-                            UCLASS()
-                            <span class="code-keyword">class</span> AMyCharacter : <span
-                                class="code-keyword">public</span> ACharacter
-                            {
-                            UPROPERTY(ReplicatedUsing=OnRep_Health)
-                            <span class="code-keyword">float</span> Health;
+UCLASS()
+<span class="code-keyword">class</span> AMyCharacter : <span class="code-keyword">public</span> ACharacter
+{
+    UPROPERTY(ReplicatedUsing=OnRep_Health)
+    <span class="code-keyword">float</span> Health;
 
-                            UPROPERTY(BlueprintAssignable)
-                            FOnHealthChanged OnHealthChanged;
+    UPROPERTY(BlueprintAssignable)
+    FOnHealthChanged OnHealthChanged;
 
-                            UFUNCTION()
-                            <span class="code-keyword">void</span> OnRep_Health();
-                            };
+    UFUNCTION()
+    <span class="code-keyword">void</span> OnRep_Health();
+};
 
-                            <span class="code-comment">// CPP file</span>
-                            <span class="code-keyword">void</span> AMyCharacter::OnRep_Health() {
-                            OnHealthChanged.Broadcast(Health);
-                            }
-                        </div>
+<span class="code-comment">// CPP file</span>
+<span class="code-keyword">void</span> AMyCharacter::OnRep_Health() {
+    OnHealthChanged.Broadcast(Health);
+}</div>
                     </div>
 
                     <div class="card" style="border: 2px solid var(--accent-success);">
@@ -1461,17 +1458,15 @@
                                 style="background: rgba(16, 185, 129, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">6
                                 lines</span>
                         </h4>
-                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Create
-                                replicated signal</span>
-                            <span class="code-keyword">auto</span> Health = MakeSignal(100.0f,
-                            <span class="code-string">"Player.Health"</span>, ESignalFlags::Replicated);
+                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Create replicated signal</span>
+<span class="code-keyword">auto</span> Health = MakeSignal(100.0f,
+    <span class="code-string">"Player.Health"</span>, ESignalFlags::Replicated);
 
-                            <span class="code-comment">// Widget auto-updates on change</span>
-                            HealthBar-&gt;BindToSignal(Health);
+<span class="code-comment">// Widget auto-updates on change</span>
+HealthBar-&gt;BindToSignal(Health);
 
-                            <span class="code-comment">// Change value - UI updates automatically</span>
-                            Health.SetValue(75.0f);
-                        </div>
+<span class="code-comment">// Change value - UI updates automatically</span>
+Health.SetValue(75.0f);</div>
                         <div
                             style="margin-top: 20px; padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                             <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px;">BENEFITS
@@ -1497,27 +1492,22 @@
                             <span
                                 style="background: rgba(239, 68, 68, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Manual</span>
                         </h4>
-                        <div class="code-snippet" style="font-size: 0.7rem;"><span class="code-comment">// Must
-                                recalculate when ANY input changes</span>
-                            <span class="code-keyword">void</span> RecalculateDamage() {
-                            FinalDamage = (BaseDamage + WeaponDamage) * Mult;
-                            OnDamageChanged.Broadcast(FinalDamage);
-                            }
+                        <div class="code-snippet" style="font-size: 0.7rem;"><span class="code-comment">// Must recalculate when ANY input changes</span>
+<span class="code-keyword">void</span> RecalculateDamage() {
+    FinalDamage = (BaseDamage + WeaponDamage) * Mult;
+    OnDamageChanged.Broadcast(FinalDamage);
+}
 
-                            <span class="code-comment">// Must call from every setter!</span>
-                            <span class="code-keyword">void</span> SetBaseDamage(<span class="code-keyword">float</span>
-                            V) {
-                            BaseDamage = V; RecalculateDamage();
-                            }
-                            <span class="code-keyword">void</span> SetWeaponDamage(<span
-                                class="code-keyword">float</span> V) {
-                            WeaponDamage = V; RecalculateDamage();
-                            }
-                            <span class="code-keyword">void</span> SetMultiplier(<span class="code-keyword">float</span>
-                            V) {
-                            Mult = V; RecalculateDamage();
-                            }
-                        </div>
+<span class="code-comment">// Must call from every setter!</span>
+<span class="code-keyword">void</span> SetBaseDamage(<span class="code-keyword">float</span> V) {
+    BaseDamage = V; RecalculateDamage();
+}
+<span class="code-keyword">void</span> SetWeaponDamage(<span class="code-keyword">float</span> V) {
+    WeaponDamage = V; RecalculateDamage();
+}
+<span class="code-keyword">void</span> SetMultiplier(<span class="code-keyword">float</span> V) {
+    Mult = V; RecalculateDamage();
+}</div>
                     </div>
 
                     <div class="card" style="border: 2px solid var(--accent-success);">
@@ -1527,20 +1517,17 @@
                             <span
                                 style="background: rgba(16, 185, 129, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Auto</span>
                         </h4>
-                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Define
-                                source
-                                signals</span>
-                            <span class="code-keyword">auto</span> BaseDamage = MakeSignal(10.0f);
-                            <span class="code-keyword">auto</span> WeaponDamage = MakeSignal(25.0f);
-                            <span class="code-keyword">auto</span> Multiplier = MakeSignal(1.5f);
+                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Define source signals</span>
+<span class="code-keyword">auto</span> BaseDamage = MakeSignal(10.0f);
+<span class="code-keyword">auto</span> WeaponDamage = MakeSignal(25.0f);
+<span class="code-keyword">auto</span> Multiplier = MakeSignal(1.5f);
 
-                            <span class="code-comment">// Computed signal - auto-updates!</span>
-                            <span class="code-keyword">auto</span> FinalDamage =
-                            (BaseDamage + WeaponDamage) * Multiplier;
+<span class="code-comment">// Computed signal - auto-updates!</span>
+<span class="code-keyword">auto</span> FinalDamage =
+    (BaseDamage + WeaponDamage) * Multiplier;
 
-                            <span class="code-comment">// Change any input → auto update</span>
-                            WeaponDamage.SetValue(50.0f);
-                        </div>
+<span class="code-comment">// Change any input → auto update</span>
+WeaponDamage.SetValue(50.0f);</div>
                         <div
                             style="margin-top: 20px; padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                             <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px;">REACTIVE
@@ -1564,24 +1551,19 @@
                             <span
                                 style="background: rgba(139, 92, 246, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Explicit</span>
                         </h4>
-                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Explicit
-                                computed with lambda</span>
-                            <span class="code-keyword">auto</span> HealthPercent = Computed(
-                            [](<span class="code-keyword">float</span> h) { <span class="code-keyword">return</span>
-                            h /
-                            100.0f; },
-                            Health
-                            );
+                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Explicit computed with lambda</span>
+<span class="code-keyword">auto</span> HealthPercent = Computed(
+    [](<span class="code-keyword">float</span> h) { <span class="code-keyword">return</span> h / 100.0f; },
+    Health
+);
 
-                            <span class="code-comment">// Complex formula with multiple deps</span>
-                            <span class="code-keyword">auto</span> DPS = Computed(
-                            [](<span class="code-keyword">float</span> dmg, <span class="code-keyword">float</span>
-                            rate) {
-                            <span class="code-keyword">return</span> dmg * rate;
-                            },
-                            BaseDamage, AttackSpeed
-                            );
-                        </div>
+<span class="code-comment">// Complex formula with multiple deps</span>
+<span class="code-keyword">auto</span> DPS = Computed(
+    [](<span class="code-keyword">float</span> dmg, <span class="code-keyword">float</span> rate) {
+        <span class="code-keyword">return</span> dmg * rate;
+    },
+    BaseDamage, AttackSpeed
+);</div>
                         <div
                             style="margin-top: 16px; padding: 12px; background: rgba(139, 92, 246, 0.1); border-radius: 8px;">
                             <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">
@@ -1597,22 +1579,18 @@
                             <span
                                 style="background: rgba(59, 130, 246, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Chainable</span>
                         </h4>
-                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Fluent
-                                API
-                                with pipe operator</span>
-                            <span class="code-keyword">auto</span> DisplayHealth = Health
-                            | Clamp(0.0f, 100.0f)
-                            | Map([](<span class="code-keyword">float</span> h) { <span
-                                class="code-keyword">return</span> h / 100.0f; })
-                            | Smooth(0.1f);
+                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Fluent API with pipe operator</span>
+<span class="code-keyword">auto</span> DisplayHealth = Health
+    | Clamp(0.0f, 100.0f)
+    | Map([](<span class="code-keyword">float</span> h) { <span class="code-keyword">return</span> h / 100.0f; })
+    | Smooth(0.1f);
 
-                            <span class="code-comment">// Filter + Debounce for input</span>
-                            <span class="code-keyword">auto</span> SearchQuery = RawInput
-                            | Filter([](<span class="code-keyword">const</span> FString& s) {
-                            <span class="code-keyword">return</span> s.Len() >= 3;
-                            })
-                            | Debounce(0.3f);
-                        </div>
+<span class="code-comment">// Filter + Debounce for input</span>
+<span class="code-keyword">auto</span> SearchQuery = RawInput
+    | Filter([](<span class="code-keyword">const</span> FString&amp; s) {
+        <span class="code-keyword">return</span> s.Len() >= 3;
+    })
+    | Debounce(0.3f);</div>
                         <div
                             style="margin-top: 16px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
                             <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">
@@ -1660,33 +1638,30 @@
                             Core Signal API <span class="verified">✓ Actual Code</span>
                         </h4>
                         <div class="code-snippet"><span class="code-comment">// Create a mutable signal</span>
-                            <span class="code-keyword">auto</span> Health = MakeSignal(100.0f);
+<span class="code-keyword">auto</span> Health = MakeSignal(100.0f);
 
-                            <span class="code-comment">// Read and write values</span>
-                            <span class="code-keyword">float</span> hp = Health.Value();
-                            Health.SetValue(75.0f); <span class="code-comment">// Propagates to observers</span>
+<span class="code-comment">// Read and write values</span>
+<span class="code-keyword">float</span> hp = Health.Value();
+Health.SetValue(75.0f); <span class="code-comment">// Propagates to observers</span>
 
-                            <span class="code-comment">// Operator chaining creates computed signals</span>
-                            <span class="code-keyword">auto</span> Damage = MakeSignal(10.0f);
-                            <span class="code-keyword">auto</span> EffectiveHP = Health - Damage;
-                        </div>
+<span class="code-comment">// Operator chaining creates computed signals</span>
+<span class="code-keyword">auto</span> Damage = MakeSignal(10.0f);
+<span class="code-keyword">auto</span> EffectiveHP = Health - Damage;</div>
                     </div>
 
                     <div>
                         <h4 style="margin-bottom: 16px; color: var(--accent-info); font-size: 0.875rem;">
                             Network Replication <span class="verified">✓ Actual Code</span>
                         </h4>
-                        <div class="code-snippet"><span class="code-comment">// Create replicated signal - no
-                                boilerplate!</span>
-                            <span class="code-keyword">auto</span> Health = MakeSignal(100.0f, Key,
-                            ESignalFlags::Replicated);
+                        <div class="code-snippet"><span class="code-comment">// Create replicated signal - no boilerplate!</span>
+<span class="code-keyword">auto</span> Health = MakeSignal(100.0f, Key,
+    ESignalFlags::Replicated);
 
-                            <span class="code-comment">// Value syncs automatically to clients</span>
-                            Health.SetValue(50.0f); <span class="code-comment">// ← Automatic replication</span>
+<span class="code-comment">// Value syncs automatically to clients</span>
+Health.SetValue(50.0f); <span class="code-comment">// ← Automatic replication</span>
 
-                            <span class="code-comment">// Uses ASignalReplicationActor singleton</span>
-                            <span class="code-comment">// + FFastArraySerializer for delta compression</span>
-                        </div>
+<span class="code-comment">// Uses ASignalReplicationActor singleton</span>
+<span class="code-comment">// + FFastArraySerializer for delta compression</span></div>
                     </div>
                 </div>
 
@@ -1695,16 +1670,13 @@
                         <h4 style="margin-bottom: 16px; color: var(--accent-purple); font-size: 0.875rem;">
                             AttributeFlow Effect System <span class="verified">✓ Actual Code</span>
                         </h4>
-                        <div class="code-snippet"><span class="code-comment">// Type-erased effect with builder
-                                pattern</span>
-                            FEffectSpec Poison = FEffectSpec::Periodic(PoisonTag, 5.0f, 1.0f)
-                            .WithAdditive&lt;<span class="code-keyword">float</span>&gt;(TEXT(<span
-                                class="code-string">"Health"</span>), -10.0f)
-                            .WithStackingPolicy(EStackingPolicy::Aggregate, 5);
+                        <div class="code-snippet"><span class="code-comment">// Type-erased effect with builder pattern</span>
+FEffectSpec Poison = FEffectSpec::Periodic(PoisonTag, 5.0f, 1.0f)
+    .WithAdditive&lt;<span class="code-keyword">float</span>&gt;(TEXT(<span class="code-string">"Health"</span>), -10.0f)
+    .WithStackingPolicy(EStackingPolicy::Aggregate, 5);
 
-                            <span class="code-comment">// Apply effect to SignalSet</span>
-                            FGuid EffectID = EffectManager.ApplyEffect(SignalSet, Poison);
-                        </div>
+<span class="code-comment">// Apply effect to SignalSet</span>
+FGuid EffectID = EffectManager.ApplyEffect(SignalSet, Poison);</div>
                     </div>
 
                     <div>
@@ -1712,15 +1684,14 @@
                             Time-Based Operators <span class="verified">✓ Actual Code</span>
                         </h4>
                         <div class="code-snippet"><span class="code-comment">// Smooth interpolation</span>
-                            <span class="code-keyword">auto</span> SmoothHP = Health.Smooth(5.0f);
+<span class="code-keyword">auto</span> SmoothHP = Health.Smooth(5.0f);
 
-                            <span class="code-comment">// Rate limiting</span>
-                            <span class="code-keyword">auto</span> ThrottledHP = Health.Throttle(0.5f);
+<span class="code-comment">// Rate limiting</span>
+<span class="code-keyword">auto</span> ThrottledHP = Health.Throttle(0.5f);
 
-                            <span class="code-comment">// Debounce and delay</span>
-                            <span class="code-keyword">auto</span> StableHP = Health.Debounce(0.3f);
-                            <span class="code-keyword">auto</span> DelayedHP = Health.Delay(1.0f);
-                        </div>
+<span class="code-comment">// Debounce and delay</span>
+<span class="code-keyword">auto</span> StableHP = Health.Debounce(0.3f);
+<span class="code-keyword">auto</span> DelayedHP = Health.Delay(1.0f);</div>
                     </div>
                 </div>
             </div>
