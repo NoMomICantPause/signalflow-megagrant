@@ -3909,17 +3909,16 @@
             blueprint: {
                 name: "Blueprint Integration",
                 color: "#06b6d4",
-                description: "UK2Node implementations exposing SignalFlow to Blueprint. Custom pins with type validation. Async Watch node for event-driven responses.",
+                description: "33 K2Nodes + 4 Blueprint Functions exposing SignalFlow to Blueprint. K2Nodes handle wildcard types and reactive exec pins. Simple collection ops (Count, Clear, RemoveAt, Swap) exposed as direct Blueprint Functions.",
                 files: [
                     { name: "K2Node_CreateSignal.h", type: "h", description: "Create Signal node with type selector pin. Outputs FSignalHandle. Supports default value input." },
                     { name: "K2Node_GetSignalValue.h", type: "h", description: "Get Signal Value with auto-typed output pin based on connected signal. Registers dependency for Computed signals." },
                     { name: "K2Node_SetSignalValue.h", type: "h", description: "Set Signal Value with type-matched input. Validates mutable flag at compile time." },
                     { name: "K2Node_WatchSignal.h", type: "h", description: "Async Watch Signal node. Fires exec pin on value change. Uses UK2Node_MacroInstance for latent action." },
                     { name: "K2Node_SignalMath.h", type: "h", description: "Math operations on signals: Add, Subtract, Multiply, Divide. Returns new Computed signal handle." },
-                    { name: "K2Node_GetAttribute.h", type: "h", description: "GAS Get Attribute from FSignalSet. Tag-based lookup with FGameplayTag input pin." },
-                    { name: "K2Node_SetAttribute.h", type: "h", description: "GAS Set Attribute with magnitude and optional duration. Applies via TypeErasedEffectManager." },
-                    { name: "K2Node_ApplyEffect.h", type: "h", description: "Apply Effect to target FSignalSet. EffectSpec asset reference input. Duration and stacking options." },
-                    { name: "BPSignalTypes.h", type: "h", description: "Blueprint-exposed types: FBPSignalHandle (wrapper), EBPSignalFlags, FBPEffectSpec. USTRUCT wrappers for BP compatibility." }
+                    { name: "K2Node_CollectionAdd.h", type: "h", description: "Collection Add with wildcard element type. Returns FGuid item ID for removal." },
+                    { name: "K2Node_WatchCollectionCount.h", type: "h", description: "Reactive collection count signal. Updates automatically on Add/Remove." },
+                    { name: "BPSignalTypes.h", type: "h", description: "Blueprint-exposed types + 4 collection functions: CollectionCount, CollectionClear, CollectionRemoveAt, CollectionSwap. No K2Node overhead for simple ops." }
                 ]
             },
             tests: {
