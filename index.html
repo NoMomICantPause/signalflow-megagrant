@@ -1647,11 +1647,11 @@
                                     Widget may be destroyed</span>
                                 Health.Watch([Widget](float v) { Widget->SetPercent(v); });
 
-                                <span style="color: var(--accent-success);">// GOOD: Use weak reference</span>
-                                TWeakObjectPtr<UWidget> WeakWidget = Widget;
-                                    Health.Watch([WeakWidget](float v) {
-                                    if (auto* W = WeakWidget.Get()) W->SetPercent(v);
-                                    });
+                                <span style="color: var(--accent-success);">// GOOD: Use WeakCapture() helper</span>
+                                auto Weak = WeakCapture(Widget);
+                                Health.Watch([Weak](float v) {
+                                if (auto* W = Weak.Get()) W-&gt;SetPercent(v);
+                                });
                             </div>
                         </div>
 
@@ -1714,6 +1714,7 @@
                                 <li>• Create/Watch signals</li>
                                 <li>• Arithmetic operators</li>
                                 <li>• Collection CRUD</li>
+                                <li>• UMG property binding</li>
                                 <li>• Effect application</li>
                             </ul>
                         </div>
@@ -1724,7 +1725,6 @@
                             <ul
                                 style="list-style: none; padding: 0; font-size: 0.75rem; color: var(--text-secondary); text-align: left;">
                                 <li>• Visual signal debugger</li>
-                                <li>• UMG property binding</li>
                                 <li>• Computed Graph editor</li>
                                 <li>• Editor widgets</li>
                             </ul>
@@ -1794,8 +1794,9 @@
                                 <h4 style="color: var(--accent-info); margin-bottom: 12px;">Step 4: Bind to UI</h4>
                                 <div class="code-snippet" style="font-size: 0.7rem;"><span class="code-comment">//
                                         Health bar updates automatically</span>
-                                    HealthPercent.Watch([Bar](float Pct) {
-                                    Bar->SetPercent(Pct);
+                                    auto Weak = WeakCapture(Bar);
+                                    HealthPercent.Watch([Weak](float Pct) {
+                                    if (auto* B = Weak.Get()) B->SetPercent(Pct);
                                     });
                                     <span class="code-comment">// Zero Tick required!</span>
                                 </div>
@@ -3854,7 +3855,8 @@
                 description: "FSignalQuery fluent builder for filtering and transforming signal collections. Chain Where(), Select(), OrderBy() calls. Lazy evaluation on terminal Execute().",
                 files: [
                     { name: "SignalQuery.h", type: "h", description: "FSignalQuery<T> fluent API. Where(predicate), Select<U>(func), OrderBy(comparator), First(), All(), Any(). Deferred execution." },
-                    { name: "SignalQuery.inl", type: "h", description: "Template implementations for query operations. Uses TArray<TSignal<T>> internally with lazy predicate evaluation." }
+                    { name: "SignalQuery.inl", type: "h", description: "Template implementations for query operations. Uses TArray<TSignal<T>> internally with lazy predicate evaluation." },
+                    { name: "SignalFactories.h", type: "h", description: "AsyncQuery<T>() for background thread queries on large datasets. SignalBatch() for bulk creation. Computed() with auto-tracking." }
                 ]
             },
             targeting: {
