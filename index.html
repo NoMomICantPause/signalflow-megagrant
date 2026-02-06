@@ -727,7 +727,7 @@
                         <span class="verified">✓ Verified</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">13</span>
+                        <span class="stat-number">37</span>
                         <span class="stat-label">Blueprint K2 Nodes</span>
                         <span class="verified">✓ Full API</span>
                     </div>
@@ -1744,36 +1744,83 @@
         <div class="section">
             <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">Blueprint Integration</h2>
             <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                13 K2 Nodes provide full Blueprint-native access to the reactive system:
+                <strong style="color: var(--accent-success);">37 K2 Nodes</strong> provide complete Blueprint-native
+                access to the reactive system:
             </p>
 
             <div class="grid-3">
                 <div class="card">
-                    <h4 style="color: var(--accent-success); margin-bottom: 12px;">Core Signals</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--text-secondary);">
+                    <h4 style="color: var(--accent-success); margin-bottom: 12px;">Core Signals <span class="verified">5
+                            nodes</span></h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
                         <li>✅ Create Signal</li>
+                        <li>✅ Create Computed Signal</li>
+                        <li>✅ Create Signal Batch</li>
                         <li>✅ Get/Set Signal Value</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-info); margin-bottom: 12px;">Collections <span class="verified">14
+                            nodes</span></h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                        <li>✅ Add / Insert / Remove / RemoveAt</li>
+                        <li>✅ Find / GetAt / Contains / Count</li>
+                        <li>✅ Clear / Swap / UpdateAt</li>
+                        <li>✅ Execute Collection Query</li>
+                        <li>✅ Watch Collection (reactive)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-purple); margin-bottom: 12px;">Watch & Tags <span class="verified">6
+                            nodes</span></h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                        <li>✅ Watch Signal (reactive callback)</li>
+                        <li>✅ Watch Signal By Tag</li>
                         <li>✅ Get Signal By Tag</li>
-                        <li>✅ Watch Signal</li>
+                        <li>✅ Watch Signal Print (debug)</li>
                     </ul>
                 </div>
                 <div class="card">
-                    <h4 style="color: var(--accent-info); margin-bottom: 12px;">Operators</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--text-secondary);">
-                        <li>✅ Signal Math (+, -, *, /)</li>
-                        <li>✅ Signal Comparison</li>
-                        <li>✅ Apply Pipeline</li>
-                        <li>✅ Collection Add</li>
+                    <h4 style="color: var(--accent-warning); margin-bottom: 12px;">Operators <span class="verified">6
+                            nodes</span></h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                        <li>✅ Signal Math (+, -, *, /, %)</li>
+                        <li>✅ Signal Arithmetic (Pow, Sqrt...)</li>
+                        <li>✅ Signal Comparison (<,>, ==, !=)</li>
+                        <li>✅ Signal Combine (And, Or, Min, Max)</li>
+                        <li>✅ Apply Pipeline (Smooth, Throttle...)</li>
+                        <li>✅ Signal Cue (GameplayCue trigger)</li>
                     </ul>
                 </div>
                 <div class="card">
-                    <h4 style="color: var(--accent-purple); margin-bottom: 12px;">AttributeFlow</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--text-secondary);">
-                        <li>✅ Get/Set Attribute</li>
-                        <li>✅ Apply/Remove Effect</li>
-                        <li>✅ Signal Cue</li>
+                    <h4 style="color: #ec4899; margin-bottom: 12px;">AttributeFlow <span class="verified">4 nodes</span>
+                    </h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                        <li>✅ Get Attribute</li>
+                        <li>✅ Set Attribute</li>
+                        <li>✅ Apply Effect</li>
+                        <li>✅ Remove Effect</li>
                     </ul>
                 </div>
+                <div class="card">
+                    <h4 style="color: #64748b; margin-bottom: 12px;">Debug <span class="verified">2 nodes</span></h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                        <li>✅ Signal Print</li>
+                        <li>✅ Watch Signal Print</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box success" style="margin-top: 24px;">
+                <h4 style="color: var(--accent-success); margin-bottom: 12px;">🎯 Key Feature: Zero C++ Required</h4>
+                <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
+                    Designers can build complete reactive systems entirely in Blueprint.
+                    <strong style="color: var(--text-primary);">Watch nodes</strong> provide reactive callbacks,
+                    <strong style="color: var(--text-primary);">Computed signals</strong> auto-update derived values,
+                    and
+                    <strong style="color: var(--text-primary);">Cue nodes</strong> trigger UE5 GameplayCues
+                    automatically.
+                </p>
             </div>
 
             <div class="img-placeholder">
