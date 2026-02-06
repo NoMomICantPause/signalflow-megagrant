@@ -1597,6 +1597,266 @@
                     Debugging techniques, common mistakes, and integration patterns from real-world usage.
                 </p>
 
+                <!-- GOLDEN PATH - Recommended First Use Case -->
+                <div class="card" style="margin-bottom: 32px; border-left: 4px solid var(--primary-blue);">
+                    <h2 style="color: var(--primary-blue); margin-bottom: 16px; font-size: 1.5rem;">🎯 Recommended
+                        Learning Path</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 1rem;">
+                        <strong>New to SignalFlow?</strong> Follow this exact order for your first 30 minutes. You'll
+                        have a working reactive UI by the end.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 16px; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span
+                                    style="background: var(--primary-blue); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;">1</span>
+                                <strong style="color: var(--text-primary);">Reactive Health Bar</strong>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">Create Signal → Watch
+                                → Update UI. <em>~10 min</em></p>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 16px; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span
+                                    style="background: var(--accent-green); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;">2</span>
+                                <strong style="color: var(--text-primary);">Computed Damage</strong>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">BaseDamage +
+                                Multipliers auto-calculate. <em>~10 min</em></p>
+                        </div>
+                        <div style="background: rgba(139, 92, 246, 0.1); padding: 16px; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span
+                                    style="background: var(--accent-purple); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;">3</span>
+                                <strong style="color: var(--text-primary);">Replicated Signal</strong>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">Add
+                                ESignalFlags::Replicated. Done. <em>~5 min</em></p>
+                        </div>
+                        <div style="background: rgba(236, 72, 153, 0.1); padding: 16px; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span
+                                    style="background: var(--accent-pink); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;">4</span>
+                                <strong style="color: var(--text-primary);">Spatial Targeting</strong>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">Optional: radius
+                                queries for AoE. <em>~5 min</em></p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 16px; margin-bottom: 0;">
+                        💡 After this path, explore AttributeFlow for GAS-style modifiers or Targeting for AI abilities.
+                    </p>
+                </div>
+
+                <!-- FEATURE SUPPORT MATRIX -->
+                <div class="card" style="margin-bottom: 32px;">
+                    <h2 style="color: var(--accent-green); margin-bottom: 16px; font-size: 1.25rem;">✅ Feature Support
+                        Matrix</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">Quick reference for
+                        what's production-ready, experimental, or intentionally excluded.</p>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border-color);">
+                                    <th style="text-align: left; padding: 12px 8px; color: var(--text-primary);">Feature
+                                    </th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-primary);">
+                                        Status</th>
+                                    <th style="text-align: left; padding: 12px 8px; color: var(--text-primary);">Notes
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Mutable + Computed
+                                        Signals</td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #22c55e;">✅</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">Core API, production-ready
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Automatic Replication
+                                    </td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #22c55e;">✅</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">Single flag, zero
+                                        boilerplate</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Spatial Radius Queries
+                                    </td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #22c55e;">✅</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">Octree + LOD,
+                                        production-ready</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">AsyncQuery (Background
+                                        Thread)</td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #22c55e;">✅</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">UE 5.7+, callback on
+                                        GameThread</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Reactive Collections
+                                    </td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #22c55e;">✅</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">TArray/TMap with derived
+                                        signals</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Blueprint K2Nodes (33)
+                                    </td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #22c55e;">✅</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">Full feature parity with
+                                        C++</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">AsSignal() + LineTrace
+                                    </td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #22c55e;">✅</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">Async traces, LOS blocking
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">AsSignal() + Custom
+                                        Filters</td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #f59e0b;">⚠️</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">Use Execute() for complex
+                                        logic</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Animation Graph Direct
+                                        Access</td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #ef4444;">❌</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">By design: use AnimNotify
+                                        bridge</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Full GAS Replacement
+                                    </td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span
+                                            style="color: #ef4444;">❌</span></td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">Complement, not replace.
+                                        See below.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- WHEN NOT TO USE -->
+                <div class="card" style="margin-bottom: 32px; border-left: 4px solid #ef4444;">
+                    <h2 style="color: #ef4444; margin-bottom: 16px; font-size: 1.25rem;">⚠️ When NOT to Use SignalFlow
+                    </h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">
+                        SignalFlow excels at many things, but knowing its limits helps you make better architecture
+                        decisions.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: 16px; border-radius: 8px;">
+                            <strong style="color: var(--text-primary); display: block; margin-bottom: 8px;">❌
+                                Frame-Critical Animation Logic</strong>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">
+                                Don't call Signal::Value() inside AnimGraph evaluation. Use the <code>AnimNotify</code>
+                                bridge or cache values pre-frame.
+                            </p>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: 16px; border-radius: 8px;">
+                            <strong style="color: var(--text-primary); display: block; margin-bottom: 8px;">❌
+                                Competitive Shooter Abilities</strong>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">
+                                Full GAS with prediction rollback is still better for competitive shooters. SignalFlow
+                                complements GAS, it doesn't replace it.
+                            </p>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: 16px; border-radius: 8px;">
+                            <strong style="color: var(--text-primary); display: block; margin-bottom: 8px;">❌ Complex
+                                Custom Targeting Filters</strong>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">
+                                <code>AsSignal()</code> works for standard radius+LOS. For complex multi-phase filters,
+                                use <code>Execute()</code> directly.
+                            </p>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: 16px; border-radius: 8px;">
+                            <strong style="color: var(--text-primary); display: block; margin-bottom: 8px;">❌
+                                Physics-Driven State</strong>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0;">
+                                Don't wrap physics velocities in signals—they change every frame. Use signals for
+                                <em>gameplay</em> state, not engine state.
+                            </p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 16px; margin-bottom: 0;">
+                        💡 Rule of thumb: if data changes every single frame, it probably shouldn't be a signal.
+                    </p>
+                </div>
+
+                <!-- SIMPLE MENTAL MODEL DIAGRAM -->
+                <div class="card" style="margin-bottom: 32px;">
+                    <h2 style="color: var(--primary-blue); margin-bottom: 16px; font-size: 1.25rem;">🧠 Mental Model
+                    </h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                        Understand SignalFlow in 5 seconds:
+                    </p>
+                    <svg viewBox="0 0 700 120"
+                        style="width: 100%; height: auto; background: #0d1117; border-radius: 8px; padding: 16px;">
+                        <!-- Signal -->
+                        <rect x="20" y="35" width="120" height="50" rx="8" fill="#3b82f6" />
+                        <text x="80" y="65" text-anchor="middle" fill="white" font-size="14"
+                            font-weight="600">Signal</text>
+                        <text x="80" y="100" text-anchor="middle" fill="#6b7280" font-size="10">Your data</text>
+
+                        <!-- Arrow 1 -->
+                        <path d="M 145 60 L 185 60" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowGray)" />
+                        <text x="165" y="50" text-anchor="middle" fill="#6b7280" font-size="9">changes</text>
+
+                        <!-- Computed -->
+                        <rect x="190" y="35" width="120" height="50" rx="8" fill="#10b981" />
+                        <text x="250" y="65" text-anchor="middle" fill="white" font-size="14"
+                            font-weight="600">Computed</text>
+                        <text x="250" y="100" text-anchor="middle" fill="#6b7280" font-size="10">Auto-updates</text>
+
+                        <!-- Arrow 2 -->
+                        <path d="M 315 60 L 355 60" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowGray)" />
+                        <text x="335" y="50" text-anchor="middle" fill="#6b7280" font-size="9">triggers</text>
+
+                        <!-- Watch -->
+                        <rect x="360" y="35" width="120" height="50" rx="8" fill="#8b5cf6" />
+                        <text x="420" y="65" text-anchor="middle" fill="white" font-size="14"
+                            font-weight="600">Watch</text>
+                        <text x="420" y="100" text-anchor="middle" fill="#6b7280" font-size="10">Your callback</text>
+
+                        <!-- Arrow 3 -->
+                        <path d="M 485 60 L 525 60" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowGray)" />
+                        <text x="505" y="50" text-anchor="middle" fill="#6b7280" font-size="9">updates</text>
+
+                        <!-- UI -->
+                        <rect x="530" y="35" width="120" height="50" rx="8" fill="#ec4899" />
+                        <text x="590" y="65" text-anchor="middle" fill="white" font-size="14" font-weight="600">UI /
+                            Game</text>
+                        <text x="590" y="100" text-anchor="middle" fill="#6b7280" font-size="10">Stays in sync</text>
+
+                        <defs>
+                            <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280" />
+                            </marker>
+                        </defs>
+                    </svg>
+                    <p
+                        style="color: var(--text-muted); font-size: 0.8rem; margin-top: 16px; text-align: center; margin-bottom: 0;">
+                        <strong>That's it.</strong> Change a Signal → Everything downstream updates automatically. Zero
+                        polling. Zero manual wiring.
+                    </p>
+                </div>
+
                 <!-- Debugging Section -->
                 <div class="card" style="border-left: 4px solid var(--accent-success); margin-bottom: 32px;">
                     <h3 style="color: var(--accent-success); margin-bottom: 20px;">🔍 Debugging Signals</h3>
