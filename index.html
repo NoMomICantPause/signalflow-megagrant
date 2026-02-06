@@ -717,12 +717,12 @@
                 </div>
                 <div class="grid-4">
                     <div class="stat-card">
-                        <span class="stat-number">37</span>
+                        <span class="stat-number">26</span>
                         <span class="stat-label">Automated Test Files</span>
                         <span class="verified">✓ Passing</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">8</span>
+                        <span class="stat-number">6</span>
                         <span class="stat-label">Performance Benchmarks</span>
                         <span class="verified">✓ Verified</span>
                     </div>
@@ -1463,14 +1463,14 @@
                         </h4>
                         <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Create
                                 replicated signal</span>
-                            <span class="code-keyword">auto</span> Health = MakeSignal(100.0f,
+                            <span class="code-keyword">auto</span> Health = Signal(100.0f,
                             <span class="code-string">"Player.Health"</span>, ESignalFlags::Replicated);
 
                             <span class="code-comment">// Widget auto-updates on change</span>
                             HealthBar-&gt;BindToSignal(Health);
 
                             <span class="code-comment">// Change value - UI updates automatically</span>
-                            Health.SetValue(75.0f);
+                            Health.Set(75.0f);
                         </div>
                         <div
                             style="margin-top: 20px; padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
@@ -1529,16 +1529,16 @@
                         </h4>
                         <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Define source
                                 signals</span>
-                            <span class="code-keyword">auto</span> BaseDamage = MakeSignal(10.0f);
-                            <span class="code-keyword">auto</span> WeaponDamage = MakeSignal(25.0f);
-                            <span class="code-keyword">auto</span> Multiplier = MakeSignal(1.5f);
+                            <span class="code-keyword">auto</span> BaseDamage = Signal(10.0f);
+                            <span class="code-keyword">auto</span> WeaponDamage = Signal(25.0f);
+                            <span class="code-keyword">auto</span> Multiplier = Signal(1.5f);
 
                             <span class="code-comment">// Computed signal - auto-updates!</span>
                             <span class="code-keyword">auto</span> FinalDamage =
                             (BaseDamage + WeaponDamage) * Multiplier;
 
                             <span class="code-comment">// Change any input → auto update</span>
-                            WeaponDamage.SetValue(50.0f);
+                            WeaponDamage.Set(50.0f);
                         </div>
                         <div
                             style="margin-top: 20px; padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
@@ -1652,183 +1652,192 @@
                 </p>
 
                 <div class="grid-2">
-                    <h4 style="margin-bottom: 16px; color: var(--accent-success); font-size: 0.875rem;">
-                        Core Signal API <span class="verified">✓ v1.0 API</span>
-                    </h4>
-                    <div class="code-snippet"><span class="code-comment">// SignalFlow v1.0 - Zero boilerplate reactive
-                            programming</span>
-                        <span class="code-keyword">auto</span> Health = Signal(100.0f, <span
-                            class="code-string">"Player.Health"</span>);
-                        <span class="code-keyword">auto</span> MaxHealth = Constant(100.0f);
-                        <span class="code-keyword">auto</span> Armor = Signal(25.0f);
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--accent-success); font-size: 0.875rem;">
+                            Core Signal API <span class="verified">✓ v1.0 API</span>
+                        </h4>
+                        <div class="code-snippet"><span class="code-comment">// SignalFlow v1.0 - Zero boilerplate
+                                reactive programming</span>
+                            <span class="code-keyword">auto</span> Health = Signal(100.0f, <span
+                                class="code-string">"Player.Health"</span>);
+                            <span class="code-keyword">auto</span> MaxHealth = Constant(100.0f);
+                            <span class="code-keyword">auto</span> Armor = Signal(25.0f);
 
-                        <span class="code-comment">// Computed signal with auto-dependency tracking</span>
-                        <span class="code-keyword">auto</span> EffectiveHP = Computed([&amp;]() {
-                        <span class="code-keyword">return</span> Health() + (Armor() * 0.5f);
-                        });
+                            <span class="code-comment">// Computed signal with auto-dependency tracking</span>
+                            <span class="code-keyword">auto</span> EffectiveHP = Computed([&amp;]() {
+                            <span class="code-keyword">return</span> Health() + (Armor() * 0.5f);
+                            });
 
-                        <span class="code-comment">// LINQ-style reactive pipelines</span>
-                        <span class="code-keyword">auto</span> DisplayHP = Health
-                        | Clamp(0.0f, MaxHealth())
-                        | Map([](<span class="code-keyword">float</span> h) { <span class="code-keyword">return</span> h
-                        / 100.0f; })
-                        | Smooth(5.0f); <span class="code-comment">// Interpolated UI</span>
+                            <span class="code-comment">// LINQ-style reactive pipelines</span>
+                            <span class="code-keyword">auto</span> DisplayHP = Health
+                            | Clamp(0.0f, MaxHealth())
+                            | Map([](<span class="code-keyword">float</span> h) { <span
+                                class="code-keyword">return</span> h / 100.0f; })
+                            | Smooth(5.0f);
 
-                        Health.Set(75.0f); <span class="code-comment">// Propagates everywhere</span>
+                            Health.Set(75.0f); <span class="code-comment">// Propagates everywhere</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--accent-info); font-size: 0.875rem;">
+                            Network + Persistence <span class="verified">✓ v1.0 API</span>
+                        </h4>
+                        <div class="code-snippet"><span class="code-comment">// Traditional UE5: ~45 lines of
+                                UPROPERTY,</span>
+                            <span class="code-comment">// DOREPLIFETIME, OnRep_*, SaveGame...</span>
+                            <span class="code-comment">// SignalFlow: 3 lines</span>
+
+                            <span class="code-keyword">auto</span> Currency = Signal(1000,
+                            <span class="code-string">"Player.Currency"</span>,
+                            ESignalFlags::Replicated | ESignalFlags::Save);
+
+                            Currency.Set(1500); <span class="code-comment">// ← Syncs + Persists</span>
+
+                            <span class="code-comment">// FFastArraySerializer delta compression</span>
+                            <span class="code-comment">// Automatic SaveGame serialization</span>
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <h4 style="margin-bottom: 16px; color: var(--accent-info); font-size: 0.875rem;">
-                        Network + Persistence <span class="verified">✓ v1.0 API</span>
-                    </h4>
-                    <div class="code-snippet"><span class="code-comment">// Traditional UE5: ~45 lines of
-                            UPROPERTY,</span>
-                        <span class="code-comment">// DOREPLIFETIME, OnRep_*, SaveGame...</span>
-                        <span class="code-comment">// SignalFlow: 3 lines</span>
+                <div class="grid-2" style="margin-top: 24px;">
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--accent-purple); font-size: 0.875rem;">
+                            Complete Damage System <span class="verified">✓ 12 lines</span>
+                        </h4>
+                        <div class="code-snippet"><span class="code-comment">// Full damage calc in 12 lines (vs ~200
+                                traditional)</span>
+                            <span class="code-keyword">auto</span> BaseDamage = Signal(50.0f);
+                            <span class="code-keyword">auto</span> CritChance = Signal(0.25f);
+                            <span class="code-keyword">auto</span> CritMult = Constant(2.0f);
 
-                        <span class="code-keyword">auto</span> Currency = Signal(1000, <span
-                            class="code-string">"Player.Currency"</span>,
-                        ESignalFlags::Replicated | ESignalFlags::Save);
+                            <span class="code-keyword">auto</span> FinalDamage = Computed([&amp;]() {
+                            <span class="code-keyword">bool</span> crit = FMath::FRand() &lt; CritChance();
+                            <span class="code-keyword">return</span> BaseDamage() * (crit ? CritMult() : 1.0f);
+                            });
 
-                        Currency.Set(1500); <span class="code-comment">// ← Syncs + Persists</span>
+                            <span class="code-comment">// Trigger gameplay cue on damage</span>
+                            FinalDamage | Cue(DamageNumberTag, World);
+                        </div>
+                    </div>
 
-                        <span class="code-comment">// FFastArraySerializer delta compression</span>
-                        <span class="code-comment">// Automatic SaveGame serialization</span>
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--accent-warning); font-size: 0.875rem;">
+                            Effect System <span class="verified">✓ Builder Pattern</span>
+                        </h4>
+                        <div class="code-snippet"><span class="code-comment">// Type-erased effect with builder
+                                pattern</span>
+                            FEffectSpec Poison = FEffectSpec::Periodic(
+                            PoisonTag, 5.0f, 1.0f)
+                            .WithAdditive&lt;<span class="code-keyword">float</span>&gt;(<span
+                                class="code-string">"Health"</span>, -10.0f)
+                            .WithStackingPolicy(
+                            EStackingPolicy::Aggregate, 5);
+
+                            <span class="code-comment">// One-liner application</span>
+                            FGuid ID = Manager.ApplyEffect(Set, Poison);
+                            Manager.RemoveEffect(ID); <span class="code-comment">// Clean removal</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="grid-2" style="margin-top: 24px;">
-                <div>
-                    <h4 style="margin-bottom: 16px; color: var(--accent-purple); font-size: 0.875rem;">
-                        Complete Damage System <span class="verified">✓ 12 lines</span>
-                    </h4>
-                    <div class="code-snippet"><span class="code-comment">// Full damage calc in 12 lines (vs ~200
-                            traditional)</span>
-                        <span class="code-keyword">auto</span> BaseDamage = Signal(50.0f);
-                        <span class="code-keyword">auto</span> CritChance = Signal(0.25f);
-                        <span class="code-keyword">auto</span> CritMult = Constant(2.0f);
-
-                        <span class="code-keyword">auto</span> FinalDamage = Computed([&amp;]() {
-                        <span class="code-keyword">bool</span> crit = FMath::FRand() &lt; CritChance();
-                        <span class="code-keyword">return</span> BaseDamage() * (crit ? CritMult() : 1.0f);
-                        });
-
-                        <span class="code-comment">// Trigger gameplay cue on damage</span>
-                        FinalDamage | Cue(DamageNumberTag, World);
-                    </div>
-                </div>
-
-                <div>
-                    <h4 style="margin-bottom: 16px; color: var(--accent-warning); font-size: 0.875rem;">
-                        Effect System <span class="verified">✓ Builder Pattern</span>
-                    </h4>
-                    <div class="code-snippet"><span class="code-comment">// Type-erased effect with builder
-                            pattern</span>
-                        FEffectSpec Poison = FEffectSpec::Periodic(
-                        PoisonTag, 5.0f, 1.0f)
-                        .WithAdditive&lt;<span class="code-keyword">float</span>&gt;(<span
-                            class="code-string">"Health"</span>, -10.0f)
-                        .WithStackingPolicy(
-                        EStackingPolicy::Aggregate, 5);
-
-                        <span class="code-comment">// One-liner application</span>
-                        FGuid ID = Manager.ApplyEffect(Set, Poison);
-                        Manager.RemoveEffect(ID); <span class="code-comment">// Clean removal</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">Blueprint Integration</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                <strong style="color: var(--accent-success);">37 K2 Nodes</strong> provide complete Blueprint-native
-                access to the reactive system:
-            </p>
-
-            <div class="grid-3">
-                <div class="card">
-                    <h4 style="color: var(--accent-success); margin-bottom: 12px;">Core Signals <span class="verified">5
-                            nodes</span></h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                        <li>✅ Create Signal</li>
-                        <li>✅ Create Computed Signal</li>
-                        <li>✅ Create Signal Batch</li>
-                        <li>✅ Get/Set Signal Value</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4 style="color: var(--accent-info); margin-bottom: 12px;">Collections <span class="verified">14
-                            nodes</span></h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                        <li>✅ Add / Insert / Remove / RemoveAt</li>
-                        <li>✅ Find / GetAt / Contains / Count</li>
-                        <li>✅ Clear / Swap / UpdateAt</li>
-                        <li>✅ Execute Collection Query</li>
-                        <li>✅ Watch Collection (reactive)</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4 style="color: var(--accent-purple); margin-bottom: 12px;">Watch & Tags <span class="verified">6
-                            nodes</span></h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                        <li>✅ Watch Signal (reactive callback)</li>
-                        <li>✅ Watch Signal By Tag</li>
-                        <li>✅ Get Signal By Tag</li>
-                        <li>✅ Watch Signal Print (debug)</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4 style="color: var(--accent-warning); margin-bottom: 12px;">Operators <span class="verified">6
-                            nodes</span></h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                        <li>✅ Signal Math (+, -, *, /, %)</li>
-                        <li>✅ Signal Arithmetic (Pow, Sqrt...)</li>
-                        <li>✅ Signal Comparison (<,>, ==, !=)</li>
-                        <li>✅ Signal Combine (And, Or, Min, Max)</li>
-                        <li>✅ Apply Pipeline (Smooth, Throttle...)</li>
-                        <li>✅ Signal Cue (GameplayCue trigger)</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4 style="color: #ec4899; margin-bottom: 12px;">AttributeFlow <span class="verified">4 nodes</span>
-                    </h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                        <li>✅ Get Attribute</li>
-                        <li>✅ Set Attribute</li>
-                        <li>✅ Apply Effect</li>
-                        <li>✅ Remove Effect</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4 style="color: #64748b; margin-bottom: 12px;">Debug <span class="verified">2 nodes</span></h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                        <li>✅ Signal Print</li>
-                        <li>✅ Watch Signal Print</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="highlight-box success" style="margin-top: 24px;">
-                <h4 style="color: var(--accent-success); margin-bottom: 12px;">🎯 Key Feature: Zero C++ Required</h4>
-                <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
-                    Designers can build complete reactive systems entirely in Blueprint.
-                    <strong style="color: var(--text-primary);">Watch nodes</strong> provide reactive callbacks,
-                    <strong style="color: var(--text-primary);">Computed signals</strong> auto-update derived values,
-                    and
-                    <strong style="color: var(--text-primary);">Cue nodes</strong> trigger UE5 GameplayCues
-                    automatically.
+            <div class="section">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">Blueprint Integration</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                    <strong style="color: var(--accent-success);">37 K2 Nodes</strong> provide complete Blueprint-native
+                    access to the reactive system:
                 </p>
-            </div>
 
-            <div class="img-placeholder">
-                Screenshot: Blueprint K2 Nodes in Action<br>
-                <small>Add: img/blueprint_nodes.png</small>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4 style="color: var(--accent-success); margin-bottom: 12px;">Core Signals <span
+                                class="verified">5
+                                nodes</span></h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                            <li>✅ Create Signal</li>
+                            <li>✅ Create Computed Signal</li>
+                            <li>✅ Create Signal Batch</li>
+                            <li>✅ Get/Set Signal Value</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: var(--accent-info); margin-bottom: 12px;">Collections <span
+                                class="verified">14
+                                nodes</span></h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                            <li>✅ Add / Insert / Remove / RemoveAt</li>
+                            <li>✅ Find / GetAt / Contains / Count</li>
+                            <li>✅ Clear / Swap / UpdateAt</li>
+                            <li>✅ Execute Collection Query</li>
+                            <li>✅ Watch Collection (reactive)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: var(--accent-purple); margin-bottom: 12px;">Watch & Tags <span
+                                class="verified">6
+                                nodes</span></h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                            <li>✅ Watch Signal (reactive callback)</li>
+                            <li>✅ Watch Signal By Tag</li>
+                            <li>✅ Get Signal By Tag</li>
+                            <li>✅ Watch Signal Print (debug)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: var(--accent-warning); margin-bottom: 12px;">Operators <span
+                                class="verified">6
+                                nodes</span></h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                            <li>✅ Signal Math (+, -, *, /, %)</li>
+                            <li>✅ Signal Arithmetic (Pow, Sqrt...)</li>
+                            <li>✅ Signal Comparison (<,>, ==, !=)</li>
+                            <li>✅ Signal Combine (And, Or, Min, Max)</li>
+                            <li>✅ Apply Pipeline (Smooth, Throttle...)</li>
+                            <li>✅ Signal Cue (GameplayCue trigger)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: #ec4899; margin-bottom: 12px;">AttributeFlow <span class="verified">4
+                                nodes</span>
+                        </h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                            <li>✅ Get Attribute</li>
+                            <li>✅ Set Attribute</li>
+                            <li>✅ Apply Effect</li>
+                            <li>✅ Remove Effect</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: #64748b; margin-bottom: 12px;">Debug <span class="verified">2 nodes</span>
+                        </h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                            <li>✅ Signal Print</li>
+                            <li>✅ Watch Signal Print</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box success" style="margin-top: 24px;">
+                    <h4 style="color: var(--accent-success); margin-bottom: 12px;">🎯 Key Feature: Zero C++ Required
+                    </h4>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
+                        Designers can build complete reactive systems entirely in Blueprint.
+                        <strong style="color: var(--text-primary);">Watch nodes</strong> provide reactive callbacks,
+                        <strong style="color: var(--text-primary);">Computed signals</strong> auto-update derived
+                        values,
+                        and
+                        <strong style="color: var(--text-primary);">Cue nodes</strong> trigger UE5 GameplayCues
+                        automatically.
+                    </p>
+                </div>
+
+                <div class="img-placeholder">
+                    Screenshot: Blueprint K2 Nodes in Action<br>
+                    <small>Add: img/blueprint_nodes.png</small>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Performance Page -->
@@ -3078,15 +3087,14 @@
 
                     fileItem.innerHTML = `
                         <div class="file-item-header">
-                            <span class="file-item-toggle">▶</span>
-                            <span class="file-type">${file.type}</span>
-                            <span>${file.name}</span>
-                        </div>
-                        <div class="file-item-details">
-                            ${desc}
-                            ${code ? `<code>${code}</code>` : ''}
-                        </div>
-                    `;
+<span class="file-item-toggle">▶</span>
+<span class="file-type">${file.type}</span>
+<span>${file.name}</span>
+</div>
+<div class="file-item-details">
+    ${desc}
+    ${code ? `<code>${code}</code>` : ''}
+</div> `;
 
                     fileItem.addEventListener('click', () => {
                         fileItem.classList.toggle('expanded');
