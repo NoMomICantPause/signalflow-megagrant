@@ -727,7 +727,7 @@
                         <span class="verified">✓ Verified</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">37</span>
+                        <span class="stat-number">34</span>
                         <span class="stat-label">Blueprint K2 Nodes</span>
                         <span class="verified">✓ Full API</span>
                     </div>
@@ -1815,6 +1815,223 @@
                             <li>✅ Signal Print</li>
                             <li>✅ Watch Signal Print</li>
                         </ul>
+                    </div>
+                </div>
+
+                <!-- Blueprint Library Functions Section -->
+                <div class="section" style="margin-top: 48px;">
+                    <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;">📚 Blueprint Library Functions
+                    </h2>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">
+                        Direct BlueprintCallable/Pure functions exposed for simpler operations without K2 node overhead.
+                        Access via <code
+                            style="background: rgba(139, 92, 246, 0.2); padding: 2px 6px; border-radius: 4px;">Signal Flow</code>
+                        category in Blueprint.
+                    </p>
+
+                    <div class="grid-2" style="gap: 20px;">
+                        <!-- Signals Category -->
+                        <div class="card" style="border-left: 4px solid var(--accent-success);">
+                            <h4 style="color: var(--accent-success); margin-bottom: 16px; font-size: 0.9rem;">
+                                🔮 Signal Flow | Signals
+                            </h4>
+                            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Get Signal
+                                    </td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Read current value (any
+                                        type)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Set Signal
+                                    </td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Write value, triggers
+                                        propagation</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Is Signal
+                                        Valid</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Check handle validity</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Combine
+                                        Signals</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Merge multiple signals
+                                        into one</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Operators Category -->
+                        <div class="card" style="border-left: 4px solid var(--accent-info);">
+                            <h4 style="color: var(--accent-info); margin-bottom: 16px; font-size: 0.9rem;">
+                                ➕ Signal Flow | Operators
+                            </h4>
+                            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Add /
+                                        Subtract</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Signal + Signal arithmetic
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Multiply /
+                                        Divide</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Signal * Signal operations
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Add
+                                        Constant</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Signal + literal value
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Multiply
+                                        Constant</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Signal * literal value
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Comparison Category -->
+                        <div class="card" style="border-left: 4px solid var(--accent-warning);">
+                            <h4 style="color: var(--accent-warning); margin-bottom: 16px; font-size: 0.9rem;">
+                                ⚖️ Signal Flow | Comparison
+                            </h4>
+                            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Greater
+                                        Than / Less Than</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Returns reactive bool
+                                        signal</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Equal To /
+                                        Not Equal</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Equality with tolerance
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                        Greater/Less Or Equal</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Inclusive comparisons</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Modifiers Category -->
+                        <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                            <h4 style="color: var(--accent-purple); margin-bottom: 16px; font-size: 0.9rem;">
+                                🎛️ Signal Flow | Modifiers
+                            </h4>
+                            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Smooth
+                                    </td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Interpolate changes over
+                                        time</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Throttle
+                                    </td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Limit propagation
+                                        frequency</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Debounce
+                                    </td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Wait for stable value</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Delay</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Fixed propagation delay
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Clamp</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Constrain to min/max</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Attributes Category -->
+                        <div class="card" style="border-left: 4px solid #ec4899;">
+                            <h4 style="color: #ec4899; margin-bottom: 16px; font-size: 0.9rem;">
+                                🎮 Signal Flow | Attributes
+                            </h4>
+                            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Get
+                                        Attribute Value</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Computed value (base +
+                                        effects)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Get
+                                        Attribute Base</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Raw base value only</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Set
+                                        Attribute Base</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Direct base modification
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Modify
+                                        Attribute</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Delta operation (Base +=
+                                        X)</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Effects Category -->
+                        <div class="card" style="border-left: 4px solid #f97316;">
+                            <h4 style="color: #f97316; margin-bottom: 16px; font-size: 0.9rem;">
+                                ✨ Signal Flow | Effects
+                            </h4>
+                            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Apply
+                                        Effect</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Timed modifier (any type)
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Remove
+                                        Effect</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Cancel by ID</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Remove
+                                        Effects By Tag</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Batch cancel by
+                                        GameplayTag</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Is Effect
+                                        Active</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Check effect status</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div
+                        style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 20px; margin-top: 24px;">
+                        <h4 style="color: var(--accent-purple); margin-bottom: 12px; font-size: 0.9rem;">
+                            💡 Progressive Disclosure Design
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">
+                            <strong style="color: var(--text-primary);">Library Functions</strong> provide direct access
+                            for simple operations.
+                            <strong style="color: var(--text-primary);">K2 Nodes</strong> add visual UX, wildcard type
+                            inference, and reactive Watch callbacks.
+                            Users choose based on complexity needs.
+                        </p>
                     </div>
                 </div>
 
