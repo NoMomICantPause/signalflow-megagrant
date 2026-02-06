@@ -961,117 +961,92 @@
             </div>
         </div>
 
-        <!-- Why This Matters Section -->
-        <div class="container" style="padding: 60px 20px;">
+        <!-- Why This Matters Section (Condensed - Details in Executive) -->
+        <div class="container" style="padding: 40px 20px;">
             <h2
-                style="font-size: 1.75rem; font-weight: 700; text-align: center; margin-bottom: 8px; color: var(--text-primary);">
-                Why This Matters for the Unreal Community
+                style="font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 24px; color: var(--text-primary);">
+                Four Problems. One Solution.
             </h2>
-            <p
-                style="text-align: center; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Four problems every UE developer faces. One unified solution.
-            </p>
-
-            <div class="grid-4">
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🔗</div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 8px; font-size: 0.875rem;">Blueprint
-                        Communication</h4>
-                    <p style="color: #ef4444; font-size: 0.75rem; margin-bottom: 4px;">Before: Casting chains +
-                        dispatchers</p>
-                    <p style="color: var(--accent-success); font-size: 0.75rem;">After: Global registry by name</p>
+            <div class="grid-4" style="gap: 16px; margin-bottom: 24px;">
+                <div style="text-align: center; padding: 16px;">
+                    <div style="font-size: 2rem; margin-bottom: 8px;">🔗</div>
+                    <div style="color: var(--text-secondary); font-size: 0.8rem;">Blueprint Communication</div>
                 </div>
-
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🖥️</div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 8px; font-size: 0.875rem;">UI Reactivity</h4>
-                    <p style="color: #ef4444; font-size: 0.75rem; margin-bottom: 4px;">Before: Poll every frame</p>
-                    <p style="color: var(--accent-success); font-size: 0.75rem;">After: Update on change only</p>
+                <div style="text-align: center; padding: 16px;">
+                    <div style="font-size: 2rem; margin-bottom: 8px;">🖥️</div>
+                    <div style="color: var(--text-secondary); font-size: 0.8rem;">UI Reactivity</div>
                 </div>
-
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">⚡</div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 8px; font-size: 0.875rem;">Type-Agnostic
-                        Attributes</h4>
-                    <p style="color: #ef4444; font-size: 0.75rem; margin-bottom: 4px;">Before: Complex inheritance
-                        chains
-                    </p>
-                    <p style="color: var(--accent-success); font-size: 0.75rem;">After: FSignalSet holds any type</p>
+                <div style="text-align: center; padding: 16px;">
+                    <div style="font-size: 2rem; margin-bottom: 8px;">⚡</div>
+                    <div style="color: var(--text-secondary); font-size: 0.8rem;">Type-Agnostic Attributes</div>
                 </div>
-
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">📱</div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 8px; font-size: 0.875rem;">Actor-Agnostic
-                        Replication</h4>
-                    <p style="color: #ef4444; font-size: 0.75rem; margin-bottom: 4px;">Before: One actor per value</p>
-                    <p style="color: var(--accent-success); font-size: 0.75rem;">After: Singleton replicates all</p>
+                <div style="text-align: center; padding: 16px;">
+                    <div style="font-size: 2rem; margin-bottom: 8px;">📱</div>
+                    <div style="color: var(--text-secondary); font-size: 0.8rem;">Actor-Free Replication</div>
                 </div>
             </div>
-
-            <div style="text-align: center; margin-top: 32px;">
-                <p style="color: var(--text-secondary); font-size: 0.875rem; max-width: 700px; margin: 0 auto;">
-                    <strong style="color: var(--accent-info);">Platform-agnostic efficiency:</strong>
-                    The actor-agnostic approach eliminates per-value overhead, benefiting
-                    <strong style="color: var(--text-primary);">PC, console, and mobile alike</strong> —
-                    from AAA MMOs to idle games and battery-conscious mobile titles.
-                </p>
-            </div>
-
-            <!-- BENCHMARK HIGHLIGHTS -->
-            <div
-                style="margin-top: 40px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 32px;">
-                <h3
-                    style="font-size: 1rem; font-weight: 700; color: var(--accent-success); margin-bottom: 24px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">
-                    ⚡ Benchmark Highlights</h3>
-                <div class="grid-4" style="gap: 20px; text-align: center;">
-                    <div>
-                        <div style="font-size: 2rem; font-weight: 900; color: #10b981;">3.7ns</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">AttributeFlow Read</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 2rem; font-weight: 900; color: #06b6d4;">486ns</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">Full Pipeline</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 2rem; font-weight: 900; color: #8b5cf6;">390ns</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">Octree Query</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 2rem; font-weight: 900; color: #f59e0b;">99ns</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">Closest Target</div>
-                    </div>
-                </div>
-                <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 16px;">
-                    Captured on AMD Ryzen 5 4600G + RTX 5060 Ti, UE 5.7 Development Build, 10K entities
-                </p>
-            </div>
-
-            <!-- GITHUB LINK -->
-            <div style="margin-top: 32px; text-align: center;">
-                <a href="https://github.com/NoMomICantPauseTheGame/SignalFlowLite" target="_blank"
-                    style="display: inline-flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 16px 32px; text-decoration: none; transition: all 0.2s ease;">
-                    <svg height="24" width="24" viewBox="0 0 16 16" fill="white">
-                        <path
-                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-                    </svg>
-                    <div style="text-align: left;">
-                        <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">View Source Code
-                            on GitHub</div>
-                        <div style="color: var(--text-muted); font-size: 0.75rem;">NoMomICantPauseTheGame/SignalFlowLite
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Developer Credits -->
-            <div
-                style="margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
-                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.875rem;">
-                    Developed by <strong style="color: rgba(255, 255, 255, 0.8);">No Mom I Can't Pause</strong><br>
-                    <span style="font-size: 0.75rem;">Lead Developer: Samir Abdallah-Saleh Gracia</span>
-                </p>
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="navigateToPage('executive')" style="font-size: 0.8rem;">
+                    📋 See Problem/Solution Details →
+                </button>
             </div>
         </div>
+
+        <!-- BENCHMARK HIGHLIGHTS -->
+        <div
+            style="margin-top: 40px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 32px;">
+            <h3
+                style="font-size: 1rem; font-weight: 700; color: var(--accent-success); margin-bottom: 24px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">
+                ⚡ Benchmark Highlights</h3>
+            <div class="grid-4" style="gap: 20px; text-align: center;">
+                <div>
+                    <div style="font-size: 2rem; font-weight: 900; color: #10b981;">3.7ns</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">AttributeFlow Read</div>
+                </div>
+                <div>
+                    <div style="font-size: 2rem; font-weight: 900; color: #06b6d4;">486ns</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Full Pipeline</div>
+                </div>
+                <div>
+                    <div style="font-size: 2rem; font-weight: 900; color: #8b5cf6;">390ns</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Octree Query</div>
+                </div>
+                <div>
+                    <div style="font-size: 2rem; font-weight: 900; color: #f59e0b;">99ns</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Closest Target</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 16px;">
+                Captured on AMD Ryzen 5 4600G + RTX 5060 Ti, UE 5.7 Development Build, 10K entities
+            </p>
+        </div>
+
+        <!-- GITHUB LINK -->
+        <div style="margin-top: 32px; text-align: center;">
+            <a href="https://github.com/NoMomICantPauseTheGame/SignalFlowLite" target="_blank"
+                style="display: inline-flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 16px 32px; text-decoration: none; transition: all 0.2s ease;">
+                <svg height="24" width="24" viewBox="0 0 16 16" fill="white">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+                <div style="text-align: left;">
+                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">View Source Code
+                        on GitHub</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem;">NoMomICantPauseTheGame/SignalFlowLite
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Developer Credits -->
+        <div
+            style="margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+            <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.875rem;">
+                Developed by <strong style="color: rgba(255, 255, 255, 0.8);">No Mom I Can't Pause</strong><br>
+                <span style="font-size: 0.75rem;">Lead Developer: Samir Abdallah-Saleh Gracia</span>
+            </p>
+        </div>
+    </div>
     </div>
 
     <!-- Executive Summary Page -->
