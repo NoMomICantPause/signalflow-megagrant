@@ -2054,6 +2054,235 @@
                     <small>Add: img/blueprint_nodes.png</small>
                 </div>
             </div>
+
+            <!-- Advanced Systems Section -->
+            <div class="section" style="margin-top: 48px;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;">🔧 Advanced Integration Systems
+                </h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">
+                    Production-ready bridges for Animation, Input, Audio, Spatial queries, and more.
+                </p>
+
+                <div class="grid-2" style="gap: 20px;">
+                    <!-- Animation Integration -->
+                    <div class="card" style="border-left: 4px solid var(--accent-success);">
+                        <h4 style="color: var(--accent-success); margin-bottom: 16px; font-size: 0.9rem;">
+                            🎬 Animation Integration <span class="verified">✓ v1.0</span>
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 12px;">
+                            Native AnimNotify integration for reactive animation events.
+                        </p>
+                        <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    AN_SignalTrigger</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Fire signal on notify hit</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    AN_SignalWindow</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">I-frames, parry windows,
+                                    combos</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Cue
+                                    Integration</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Auto-fire GameplayCues on
+                                    trigger</td>
+                            </tr>
+                        </table>
+                        <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
+                                class="code-comment">// Parry window setup in AnimMontage</span>
+                            UPROPERTY() FGameplayTag SignalTag;
+                            UPROPERTY() <span class="code-keyword">bool</span> bInterpolate = <span
+                                class="code-keyword">true</span>;
+                            UPROPERTY() <span class="code-keyword">bool</span> bFireCueOnStart = <span
+                                class="code-keyword">true</span>;</div>
+                    </div>
+
+                    <!-- Enhanced Input Bridge -->
+                    <div class="card" style="border-left: 4px solid var(--accent-info);">
+                        <h4 style="color: var(--accent-info); margin-bottom: 16px; font-size: 0.9rem;">
+                            🎮 Enhanced Input Bridge <span class="verified">✓ v1.0</span>
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 12px;">
+                            Create reactive signals directly from Enhanced Input Actions.
+                        </p>
+                        <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    CreateBoolSignal</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Digital button state</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    CreateAxis2DSignal</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Analog stick as FVector2D</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    CreateVectorSignal</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">3D input as FVector</td>
+                            </tr>
+                        </table>
+                        <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
+                                class="code-comment">// Reactive input in 2 lines</span>
+                            <span class="code-keyword">auto</span> MoveInput = InputBridge::CreateAxis2DSignal(
+                            InputComp, MoveAction, ETriggerEvent::Triggered);
+                            <span class="code-keyword">auto</span> SmoothedMove = MoveInput | Smooth(0.1f);
+                        </div>
+                    </div>
+
+                    <!-- Spatial & Targeting -->
+                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                        <h4 style="color: var(--accent-purple); margin-bottom: 16px; font-size: 0.9rem;">
+                            📍 Spatial &amp; Targeting <span class="verified">✓ v1.0</span>
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 12px;">
+                            High-performance Octree spatial queries and targeting system.
+                        </p>
+                        <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">SpatialOctree
+                                </td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">O(log n) spatial queries</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">TargetingQuery
+                                </td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Fluent target selection</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">ClosestTo /
+                                    LOS</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">99ns closest, path-based</td>
+                            </tr>
+                        </table>
+                        <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
+                                class="code-comment">// Target selection pipeline</span>
+                            <span class="code-keyword">auto</span> Target = TargetingQuery::InRadius(Pos, 1000.f)
+                            .WithLineOfSight(World)
+                            .ClosestTo(Player)
+                            .Execute();
+                        </div>
+                    </div>
+
+                    <!-- Audio Integration -->
+                    <div class="card" style="border-left: 4px solid var(--accent-warning);">
+                        <h4 style="color: var(--accent-warning); margin-bottom: 16px; font-size: 0.9rem;">
+                            🔊 Audio Integration <span class="verified">✓ v1.0</span>
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 12px;">
+                            Metasound binding and GameplayCue triggers from signals.
+                        </p>
+                        <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    MetasoundOperators</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Drive Metasound params</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">CueOperator
+                                </td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">GameplayCue on value change
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">CueManager
+                                </td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Priority batching, cooldowns
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
+                                class="code-comment">// Trigger VFX/SFX on damage</span>
+                            Damage | Cue(DamageNumberTag, World);
+                            Health | Cue(LowHealthWarningTag, World,
+                            FSignalCueOptions().Cooldown(2.0f));</div>
+                    </div>
+
+                    <!-- LINQ-style Queries -->
+                    <div class="card" style="border-left: 4px solid #3b82f6;">
+                        <h4 style="color: #3b82f6; margin-bottom: 16px; font-size: 0.9rem;">
+                            🔍 LINQ-style Queries <span class="verified">✓ v1.0</span>
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 12px;">
+                            Fluent query builder for filtering, aggregating, and transforming signals.
+                        </p>
+                        <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">All / From /
+                                    InRadius</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Query sources</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">WithFlags /
+                                    Where</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Lazy filter predicates</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Sum / Average
+                                    / MinMax</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Value aggregation</td>
+                            </tr>
+                        </table>
+                        <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
+                                class="code-comment">// LINQ-style signal query</span>
+                            <span class="code-keyword">float</span> TotalDamage = SignalQuery::All()
+                            .WithFlags(ESignalFlags::Damage)
+                            .InRadius(Center, 500.f, Spatial)
+                            .Sum&lt;<span class="code-keyword">float</span>&gt;();
+                        </div>
+                    </div>
+
+                    <!-- Persistence -->
+                    <div class="card" style="border-left: 4px solid #64748b;">
+                        <h4 style="color: #64748b; margin-bottom: 16px; font-size: 0.9rem;">
+                            💾 Persistence System <span class="verified">✓ v1.0</span>
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 12px;">
+                            Automatic save/load integration with delta compression.
+                        </p>
+                        <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    ESignalFlags::Save</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Mark signal for persistence
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                    FSignalSaveSystem</td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Delta saves, dirty tracking
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">Auto-restore
+                                </td>
+                                <td style="padding: 8px 0; color: var(--text-secondary);">Values loaded on signal create
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
+                                class="code-comment">// Persistent signal - one flag</span>
+                            <span class="code-keyword">auto</span> Currency = Signal(1000, <span
+                                class="code-string">"Player.Gold"</span>,
+                            ESignalFlags::Replicated | ESignalFlags::Save);
+                            <span class="code-comment">// Value persists across sessions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box info" style="margin-top: 24px;">
+                    <h4 style="color: var(--accent-info); margin-bottom: 12px;">🚀 Zero Configuration</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
+                        All integration systems work <strong style="color: var(--text-primary);">out of the
+                            box</strong>.
+                        Animation notifies auto-discover signals by tag. Input bridges bind automatically.
+                        Persistence uses native UE SaveGame format. No setup required.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
