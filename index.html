@@ -2887,6 +2887,7 @@
                 <button class="filter-btn" data-filter="bridges">Bridges</button>
                 <button class="filter-btn" data-filter="audio">Audio</button>
                 <button class="filter-btn" data-filter="binding">UI</button>
+                <button class="filter-btn" data-filter="collections">Collections</button>
                 <button class="filter-btn" data-filter="blueprint">Blueprint</button>
                 <button class="filter-btn" data-filter="tests">Tests</button>
             </div>
@@ -3468,7 +3469,34 @@
                     { name: "ISignalProvider.h", type: "h", description: "Interface for custom signal providers. Implement to expose signals from any source." },
                     { name: "SignalBindingComponent.h", type: "h", description: "Actor component for binding signals to actor properties. Auto-cleanup on destroy." },
                     { name: "SignalBindingSubsystem.h", type: "h", description: "World subsystem managing all active bindings. Batched updates per frame." },
-                    { name: "SignalPropertyBridge.h", type: "h", description: "Direct UProperty ↔ Signal bridging with FProperty reflection." }
+                ]
+            },
+            collections: {
+                name: "Reactive Collections",
+                color: "#22d3ee",
+                description: "Observable array signals with O(1) granular updates. TCollectionSignal<T> notifies only changed indices on Add/Remove/Update. 16 Blueprint K2Nodes for CRUD and reactive watching. Powers efficient UI lists without full-array diff.",
+                files: [
+                    { name: "CollectionSignal.h", type: "h", description: "TCollectionSignal<T> with Add(), RemoveAt(), UpdateAt(), Clear(). O(1) granular notifications. Map<U>(func) creates incremental mapped signal." },
+                    { name: "CollectionTypes.h", type: "h", description: "FCollectionChangeEvent: Operation enum (Add/Remove/Update/Clear), Index, optional OldValue. Batch mode for multi-op transactions." },
+                    { name: "CollectionSignalBehavior.h", type: "h", description: "TCollectionSignalBehavior<T> backing granular updates. Maintains parallel ChangeHistory for delta propagation." },
+                    { name: "CollectionView.h", type: "h", description: "Read-only filtered/sorted view over collection. Lazily computed, caches result until source changes." },
+                    { name: "CollectionQueryAsset.h", type: "h", description: "UCollectionQueryAsset for Blueprint-defined queries. Where/OrderBy/Take chains serialized as DataAsset." },
+                    { name: "K2Node_CollectionAdd.h", type: "h", description: "Blueprint Add node. Appends item, returns new index. Triggers WatchCollectionCount subscribers." },
+                    { name: "K2Node_CollectionRemove.h", type: "h", description: "Remove by value. Returns bool success. O(n) search, O(1) removal notification." },
+                    { name: "K2Node_CollectionRemoveAt.h", type: "h", description: "Remove by index. Direct O(1) operation with bounds checking." },
+                    { name: "K2Node_CollectionInsert.h", type: "h", description: "Insert at index. Shifts subsequent indices. Notifies all affected WatchGetAt observers." },
+                    { name: "K2Node_CollectionUpdateAt.h", type: "h", description: "In-place update. Only fires if value actually changed (equality check)." },
+                    { name: "K2Node_CollectionSwap.h", type: "h", description: "Swap two indices. Fires two Update events, not Remove+Add." },
+                    { name: "K2Node_CollectionClear.h", type: "h", description: "Clear all items. Single Clear event, not N Remove events." },
+                    { name: "K2Node_CollectionGetAt.h", type: "h", description: "Non-reactive index access. Returns item reference with bounds check." },
+                    { name: "K2Node_CollectionFind.h", type: "h", description: "Find index of value. Returns -1 if not found." },
+                    { name: "K2Node_CollectionContains.h", type: "h", description: "Check if value exists. Returns bool." },
+                    { name: "K2Node_CollectionCount.h", type: "h", description: "Non-reactive count access. Use WatchCollectionCount for reactive." },
+                    { name: "K2Node_WatchCollectionCount.h", type: "h", description: "Reactive signal<int32> tracking collection size. Updates on Add/Remove/Clear." },
+                    { name: "K2Node_WatchCollectionGetAt.h", type: "h", description: "Reactive 'slot pointer'. Fires when item at index changes or is removed." },
+                    { name: "K2Node_WatchCollectionContains.h", type: "h", description: "Reactive bool signal. Fires when target value is added/removed." },
+                    { name: "K2Node_WatchCollectionFind.h", type: "h", description: "Reactive index signal. Fires when target value's index changes." },
+                    { name: "K2Node_ExecuteCollectionQuery.h", type: "h", description: "Execute UCollectionQueryAsset. Returns filtered/sorted TArray snapshot." }
                 ]
             }
         };
@@ -3629,10 +3657,11 @@
                 'targeting': ['spatial', 'signals'],         // Targeting uses spatial + signals
                 'bridges': ['signals', 'core'],              // Input bridges feed signals
                 'audio': ['signals', 'operators'],           // Audio integration uses signals + operators
-                'binding': ['signals', 'core', 'attributeflow'], // UI binding observes signals + attributes
+                'binding': ['signals', 'core', 'attributeflow', 'collections'], // UI binding observes signals + attributes + collections
+                'collections': ['signals'],                   // Collections are reactive arrays built on signals
                 'prediction': ['signals', 'replication'],    // Prediction extends replication
-                'blueprint': ['signals', 'attributeflow', 'core'],  // Blueprint exposes signals + AttributeFlow
-                'tests': ['core', 'signals', 'attributeflow'] // Tests verify all systems
+                'blueprint': ['signals', 'attributeflow', 'core', 'collections'],  // Blueprint exposes signals + AttributeFlow + Collections
+                'tests': ['core', 'signals', 'attributeflow', 'collections'] // Tests verify all systems
             };
             Object.keys(data).forEach(src => {
                 if (deps[src]) deps[src].forEach(tgt => { if (data[tgt]) links.push({ source: src, target: tgt, type: 'dep' }); });
