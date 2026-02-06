@@ -2701,7 +2701,7 @@
                             <li>✅ 13 Blueprint K2 nodes</li>
                             <li>✅ Persistence system (LZ4 + Delta + CRC32)</li>
                             <li>✅ Client prediction framework</li>
-                            <li>✅ 37 tests, 8 benchmarks</li>
+                            <li>✅ 26 tests, 6 benchmarks</li>
                         </ul>
                     </div>
                 </div>
@@ -3424,21 +3424,51 @@
             tests: {
                 name: "Test Suite",
                 color: "#c9a96e",
-                description: "Automation framework tests validating all subsystems. Performance benchmarks measuring signal creation throughput, effect application, and spatial queries.",
+                description: "26 automated test files + 6 benchmarks validating all subsystems. Covers core signals, operators, replication, spatial, targeting, persistence, audio, bridges, and more.",
                 files: [
-                    { name: "SignalCoreTests.cpp", type: "cpp", description: "FSignalHandle creation, Value/SetValue roundtrip, observer notification, dependency tracking. 12 test cases." },
-                    { name: "OperatorTests.cpp", type: "cpp", description: "Arithmetic, comparison, logical operators. Computed signal propagation. Edge cases: division by zero, NaN handling." },
-                    { name: "ReplicationTests.cpp", type: "cpp", description: "Client-server signal sync. Late-joiner snapshot. Delta compression verification. NetID stability." },
-                    { name: "SpatialTests.cpp", type: "cpp", description: "Octree insertion/removal, radius queries, box queries, GlobalFallbackSet for out-of-bounds entities." },
-                    { name: "GASTests.cpp", type: "cpp", description: "Effect application, stacking policies (Replace/Aggregate/Stack), modifier arithmetic, duration expiry." },
-                    { name: "PersistenceTests.cpp", type: "cpp", description: "Save/Load roundtrip. Version compatibility. Corrupted data handling." },
-                    { name: "QueryTests.cpp", type: "cpp", description: "FSignalQuery Where/Select/OrderBy chains. Empty result handling. Performance with 10K signals." },
-                    { name: "TargetingTests.cpp", type: "cpp", description: "Distance filter accuracy, LOS blocking, cone angle validation. Integration with SpatialOctreeManager." },
-                    { name: "Benchmark_Core.cpp", type: "cpp", description: "100K signal creation throughput. Target: <50ms. Measures shard distribution and allocation overhead." },
-                    { name: "Benchmark_GAS.cpp", type: "cpp", description: "1000 effects/frame application. Type-erased vs typed comparison. Stacking overhead measurement." },
-                    { name: "Benchmark_Spatial.cpp", type: "cpp", description: "10K entity octree with 1000 queries/frame. Measures traversal and result collection." },
-                    { name: "Benchmark_Queries.cpp", type: "cpp", description: "FSignalQuery performance on 10K signal collections. Lazy vs eager evaluation comparison." },
-                    { name: "Benchmark_TargetingCalc.cpp", type: "cpp", description: "FTargetingQuery with spatial integration. 100 queries/frame with 1000 potential targets." }
+                    { name: "SignalFlowTest.cpp", type: "cpp", description: "Core signal creation, Value/SetValue roundtrip, observer notification, dependency tracking." },
+                    { name: "SignalFlowPortedFeaturesTest.cpp", type: "cpp", description: "Ported Reactivo features validation: computed signals, operators, chaining." },
+                    { name: "DependencyTest.cpp", type: "cpp", description: "Unit tests for topological sort and glitch-free propagation." },
+                    { name: "FunctionalOperatorsTest.cpp", type: "cpp", description: "Map, Filter, Reduce operators. Edge cases and chaining." },
+                    { name: "TimeOperatorsTest.cpp", type: "cpp", description: "Delay, Debounce, Throttle, Smooth operators with timing validation." },
+                    { name: "AudioOperatorsTest.cpp", type: "cpp", description: "Audio-specific operators: envelope, RMS, frequency analysis." },
+                    { name: "AudioAAATest.cpp", type: "cpp", description: "AAA-grade audio integration stress tests." },
+                    { name: "SignalFlowInputBufferTest.cpp", type: "cpp", description: "Input buffer ring handling and overflow protection." },
+                    { name: "ReplicationTest.cpp", type: "cpp", description: "Client-server signal sync. Late-joiner snapshot. Delta compression." },
+                    { name: "SpawnRegistryTest.cpp", type: "cpp", description: "Unit tests for spawn-time signal registration." },
+                    { name: "SpatialTest.cpp", type: "cpp", description: "Octree insertion/removal, radius queries, box queries." },
+                    { name: "SpatialOctreeTest.cpp", type: "cpp", description: "Octree node splitting, merging, and balance validation." },
+                    { name: "SpatialBoundsTest.cpp", type: "cpp", description: "World bounds handling and GlobalFallbackSet." },
+                    { name: "AsyncTraceTest.cpp", type: "cpp", description: "Async line-of-sight traces integration." },
+                    { name: "SignalFlowTargetingTest.cpp", type: "cpp", description: "Distance filter, LOS blocking, cone angle validation." },
+                    { name: "SignalQueryTest.cpp", type: "cpp", description: "LINQ-style Where/Select/OrderBy chains. Performance with 10K signals." },
+                    { name: "SaveLoadTest.cpp", type: "cpp", description: "Save/Load roundtrip. Version compatibility. Corrupted data handling." },
+                    { name: "DeltaSnapshotTest.cpp", type: "cpp", description: "Unit tests for delta compression snapshots." },
+                    { name: "PredictionTest.cpp", type: "cpp", description: "Client prediction with server reconciliation." },
+                    { name: "MetasoundOperatorsTest.cpp", type: "cpp", description: "Metasound integration and audio parameter binding." },
+                    { name: "BridgesTest.cpp", type: "cpp", description: "AnimNotify and Enhanced Input bridge integration." },
+                    { name: "BlueprintIntegrationTest.cpp", type: "cpp", description: "K2Node compilation and Blueprint signal operations." },
+                    { name: "SafetyTest.cpp", type: "cpp", description: "Null handle protection, weak pointer validation, error recovery." },
+                    { name: "AsSignalTest.cpp", type: "cpp", description: "Unit tests for AsSignal conversion operators." },
+                    { name: "TransientTest.cpp", type: "cpp", description: "Unit tests for transient value store." },
+                    { name: "TestGameplayTags.cpp", type: "cpp", description: "GameplayTag registration and lookup for tests." },
+                    { name: "Benchmark_Core.cpp", type: "cpp", description: "100K signal creation throughput. Target: <50ms." },
+                    { name: "Benchmark_AttributeFlow.cpp", type: "cpp", description: "FSignalSet and effect application performance." },
+                    { name: "Benchmark_Spatial.cpp", type: "cpp", description: "10K entity octree with 1000 queries/frame." },
+                    { name: "Benchmark_Queries.cpp", type: "cpp", description: "LINQ query performance on 10K signal collections." },
+                    { name: "Benchmark_TargetingCalc.cpp", type: "cpp", description: "100 targeting queries/frame with 1000 potential targets." },
+                    { name: "Benchmark_Bridges.cpp", type: "cpp", description: "Input and Animation bridge throughput." }
+                ]
+            },
+            binding: {
+                name: "Property Binding",
+                color: "#f472b6",
+                description: "UI and property binding system. Connects signals to UMG widgets, UProperties, and custom providers with automatic lifetime management.",
+                files: [
+                    { name: "ISignalProvider.h", type: "h", description: "Interface for custom signal providers. Implement to expose signals from any source." },
+                    { name: "SignalBindingComponent.h", type: "h", description: "Actor component for binding signals to actor properties. Auto-cleanup on destroy." },
+                    { name: "SignalBindingSubsystem.h", type: "h", description: "World subsystem managing all active bindings. Batched updates per frame." },
+                    { name: "SignalPropertyBridge.h", type: "h", description: "Direct UProperty ↔ Signal bridging with FProperty reflection." }
                 ]
             }
         };
