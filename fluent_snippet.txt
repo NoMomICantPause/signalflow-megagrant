@@ -1,0 +1,18 @@
+                    <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Fluent API
+                                with pipe operator</span>
+                            <span class="code-keyword">auto</span> DisplayHealth = Health
+                            | Clamp(0.0f, 100.0f)
+                            | Map([](<span class="code-keyword">float</span> h) { <span
+                                class="code-keyword">return</span> h / 100.0f; })
+                            | Smooth(0.1f);
+
+                            <span class="code-comment">// Filter + Debounce for input</span>
+                            <span class="code-keyword">auto</span> SearchQuery = RawInput
+                            | Filter([](<span class="code-keyword">const</span> FString&amp; s) {
+                            <span class="code-keyword">return</span> s.Len() >= 3;
+                            })
+                            | Debounce(0.3f);
+                        </div>
+                        <div
+                            style="margin-top: 16px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
+                            

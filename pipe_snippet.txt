@@ -1,0 +1,25 @@
+Pipe Operators</h3>
+                <div class="grid-2">
+                    <div class="card" style="border: 2px solid var(--accent-purple);">
+                        <h4
+                            style="color: var(--accent-purple); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                            🔮 Computed with Lambda
+                            <span
+                                style="background: rgba(139, 92, 246, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Explicit</span>
+                        </h4>
+                        <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Explicit computed with lambda</span>
+<span class="code-keyword">auto</span> HealthPercent = Computed(
+    [](<span class="code-keyword">float</span> h) { <span class="code-keyword">return</span> h / 100.0f; },
+    Health
+);
+
+<span class="code-comment">// Complex formula with multiple deps</span>
+<span class="code-keyword">auto</span> DPS = Computed(
+    [](<span class="code-keyword">float</span> dmg, <span class="code-keyword">float</span> rate) {
+        <span class="code-keyword">return</span> dmg * rate;
+    },
+    BaseDamage, AttackSpeed
+);</div>
+                        <div
+                            style="margin-top: 16px; padding: 12px; background: rgba(139, 92, 246, 0.1); border-radius: 8px;">
+                            <p style="font-size: 0.8rem; color

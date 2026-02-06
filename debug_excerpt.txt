@@ -1,0 +1,29 @@
+                   DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
+                            FOnHealthChanged, <span class="code-keyword">float</span>, NewHealth);
+
+                            UCLASS()
+                            <span class="code-keyword">class</span> AMyCharacter : <span
+                                class="code-keyword">public</span> ACharacter
+                            {
+                            UPROPERTY(ReplicatedUsing=OnRep_Health)
+                            <span class="code-keyword">float</span> Health;
+
+                            UPROPERTY(BlueprintAssignable)
+                            FOnHealthChanged OnHealthChanged;
+
+                            UFUNCTION()
+                            <span class="code-keyword">void</span> OnRep_Health();
+                            };
+
+                            <span class="code-comment">// CPP file</span>
+                            <span class="code-keyword">void</span> AMyCharacter::OnRep_Health() {
+                            OnHealthChanged.Broadcast(Health);
+                            }
+                        </div>
+                    </div>
+
+                    <div class="card" style="border: 2px solid var(--accent-success);">
+                        <h4
+                            style="color: var(--accent-success); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                            ✅ SignalFlow: Same Result
+  
