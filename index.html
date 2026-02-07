@@ -1688,7 +1688,7 @@
                                     </td>
                                     <td style="padding: 10px 8px; text-align: center;"><span
                                             style="color: #22c55e;">✅</span></td>
-                                    <td style="padding: 10px 8px; color: var(--text-muted);">39 K2Nodes + 55 BP
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">43 K2Nodes + 55 BP
                                         Functions</td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-color);">
@@ -3815,7 +3815,7 @@
                             stroke-width="2" />
                         <text x="640" y="300" text-anchor="middle" fill="#06b6d4" font-size="14"
                             font-weight="bold">BLUEPRINT</text>
-                        <text x="640" y="330" text-anchor="middle" fill="#94a3b8" font-size="11">39 K2Nodes +
+                        <text x="640" y="330" text-anchor="middle" fill="#94a3b8" font-size="11">43 K2Nodes +
                             Library</text>
                         <!-- Core -> Storage & AttributeFlow -->
                         <path d="M 220 130 L 220 160" stroke="#64748b" stroke-width="2" marker-end="url(#arr3)" />
@@ -4240,7 +4240,7 @@
             blueprint: {
                 name: "Blueprint Integration",
                 color: "#06b6d4",
-                description: "39 K2Nodes + 55 Blueprint Functions exposing SignalFlow to Blueprint. K2Nodes handle wildcard types and reactive exec pins. Includes 11 Set/Map K2Nodes for TSet and TMap CRUD. 3 Blueprint Libraries: BPSignalTypes (28), AttributeFlow (16), Spatial (11).",
+                description: "43 K2Nodes + 55 Blueprint Functions exposing SignalFlow to Blueprint. K2Nodes handle wildcard types and reactive exec pins. Includes 11 Set/Map K2Nodes for TSet and TMap CRUD. 4 Spatial K2Nodes for position binding and queries. 3 Blueprint Libraries: BPSignalTypes (28), AttributeFlow (16), Spatial (11).",
                 files: [
                     { name: "K2Node_CreateSignal.h", type: "h", description: "Create Signal node with type selector pin. Outputs FSignalHandle. Supports default value input." },
                     { name: "K2Node_GetSignalValue.h", type: "h", description: "Get Signal Value with auto-typed output pin based on connected signal. Registers dependency for Computed signals." },
@@ -4249,6 +4249,10 @@
                     { name: "K2Node_SignalMath.h", type: "h", description: "Math operations on signals: Add, Subtract, Multiply, Divide. Returns new Computed signal handle." },
                     { name: "K2Node_CollectionAdd.h", type: "h", description: "Collection Add with wildcard element type. Returns FGuid item ID for removal." },
                     { name: "K2Node_WatchCollectionCount.h", type: "h", description: "Reactive collection count signal. Updates automatically on Add/Remove." },
+                    { name: "K2Node_BindToPosition.h", type: "h", description: "Spatial: One-step node that creates a tracked position + binds a signal. Advanced pins for velocity/max speed. Returns position handle." },
+                    { name: "K2Node_GetSignalPosition.h", type: "h", description: "Spatial: Pure node returning current FVector world position for a spatially-bound signal." },
+                    { name: "K2Node_GetDistanceToPoint.h", type: "h", description: "Spatial: Pure node returning float distance from bound signal position to target point." },
+                    { name: "K2Node_GetSignalsInRadius.h", type: "h", description: "Spatial: Pure radius query returning TArray of all signals within range. O(1) multi-layer grid." },
                     { name: "BPSignalTypes.h", type: "h", description: "Blueprint-exposed types + 28 user-facing functions: arithmetic (6), comparison (6), time modifiers (5), collection ops (4), core get/set (2), state queries (5). No K2Node overhead for simple ops." }
                 ]
             },
