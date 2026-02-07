@@ -2272,6 +2272,76 @@
                         </div>
                     </div>
 
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin: 32px 0 16px; color: var(--text-primary);">
+                        Game-Ready Reactive Operators</h3>
+                    <div class="grid-2">
+                        <div class="card" style="border: 2px solid var(--accent-success);">
+                            <h4
+                                style="color: var(--accent-success); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                🎯 Reactive Operators
+                                <span
+                                    style="background: rgba(16, 185, 129, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Game
+                                    Logic</span>
+                            </h4>
+                            <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// One-shot
+                                    trigger (fires once, auto-disposes)</span>
+                                Health | When([](<span class="code-keyword">float</span> H) { <span
+                                    class="code-keyword">return</span> H &lt;= 0; },
+                                [<span class="code-keyword">this</span>]() { Die(); });
+
+                                <span class="code-comment">// Ability gated by mana check</span>
+                                <span class="code-keyword">auto</span> HasMana = Mana | Map([](<span
+                                    class="code-keyword">float</span> M) {
+                                <span class="code-keyword">return</span> M &gt;= 30.0f; });
+                                CastInput | Gate(HasMana)
+                                | Watch([<span class="code-keyword">this</span>](<span class="code-keyword">bool</span>)
+                                { CastFireball(); });
+                            </div>
+                            <div
+                                style="margin-top: 16px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">
+                                    <strong>When</strong> · <strong>Gate</strong> · <strong>Cooldown</strong> ·
+                                    <strong>WithPrevious</strong> · <strong>OnTransition</strong> — game patterns as
+                                    first-class operators.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card" style="border: 2px solid var(--accent-warning);">
+                            <h4
+                                style="color: var(--accent-warning); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                ⚡ State &amp; Timing
+                                <span
+                                    style="background: rgba(245, 158, 11, 0.2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Combat</span>
+                            </h4>
+                            <div class="code-snippet" style="font-size: 0.8rem;"><span class="code-comment">// Delta
+                                    damage calculation</span>
+                                Health | WithPrevious()
+                                | Map([](TPair&lt;<span class="code-keyword">float</span>,<span
+                                    class="code-keyword">float</span>&gt; P) {
+                                <span class="code-keyword">return</span> P.Key - P.Value; <span class="code-comment">//
+                                    damage dealt</span>
+                                });
+
+                                <span class="code-comment">// State machine transitions</span>
+                                GameState | OnTransition([](EState From, EState To) {
+                                <span class="code-keyword">if</span> (From == Playing &amp;&amp; To == Paused)
+                                PauseMusic();
+                                });
+
+                                <span class="code-comment">// Attack with 2s cooldown</span>
+                                AttackInput | Cooldown(2.0f);
+                            </div>
+                            <div
+                                style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">
+                                    Replaces boilerplate <code>bool bFired</code> guards, manual delta tracking, and FSM
+                                    transition handlers.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="highlight-box success" style="margin-top: 24px;">
                         <div style="display: flex; justify-content: space-around; text-align: center;">
                             <div>
@@ -4059,7 +4129,8 @@
                     { name: "LogicalOperators.h", type: "h", description: "operator&&, ||, ! for TSignal<bool>. Short-circuit evaluation preserved via lazy computation." },
                     { name: "TimeOperators.h", type: "h", description: "Smooth(float Speed), Throttle(float Interval), Debounce(float Delay), Delay(float Seconds). Each creates behavior-backed signal processed via scheduler." },
                     { name: "InputOperators.h", type: "h", description: "Map<U>(func), Filter(predicate), Reduce<AccT>(init, reducer). Functional programming operators for signal transformation." },
-                    { name: "PipeOperators.h", type: "h", description: "operator| for fluent chaining: Health | Smooth(0.5f) | Clamp(0, 100). Returns appropriate signal type per operation." }
+                    { name: "PipeOperators.h", type: "h", description: "operator| for fluent chaining: Health | Smooth(0.5f) | Clamp(0, 100). Returns appropriate signal type per operation." },
+                    { name: "ReactiveOperators.h", type: "h", description: "Game-specific reactive operators: When (one-shot trigger), WithPrevious (delta pairs), OnTransition (state change), Cooldown (post-fire lockout via FSignalTimeSource), Gate (conditional pass-through)." }
                 ]
             },
             attributeflow: {
@@ -4282,6 +4353,7 @@
             'MakeSignal.h': { desc: 'Factory functions for creating signals with different behaviors.', code: 'auto Health = MakeSignal(100.0f);\nauto Computed = Computed([](float h) {\n  return h / 100.0f;\n}, Health);' },
             'ArithmeticOperators.h': { desc: 'Operator overloads for signal arithmetic: +, -, *, /.', code: 'auto Sum = SignalA + SignalB;\nauto Scaled = Signal * 2.0f;' },
             'PipeOperators.h': { desc: 'Pipe operator | for fluent chaining of signal transformations.', code: 'auto Result = Input\n  | Clamp(0, 100)\n  | Map([](auto v) { return v * 2; })\n  | Debounce(0.3f);' },
+            'ReactiveOperators.h': { desc: 'Game-specific reactive operators for combat, abilities, and state machines.', code: 'Health | When([](float H) { return H <= 0; },\n  [this]() { Die(); });\n\nCastInput | Gate(HasMana)\n  | Watch([](bool) { CastFireball(); });\n\nAttackInput | Cooldown(2.0f);' },
             'TimeOperators.h': { desc: 'Time-based operators: Delay, Debounce, Throttle, Smooth.', code: 'auto Delayed = Signal | Delay(1.0f);\nauto Smooth = Signal | Smooth(0.1f);' },
             'TypeErasedEffectSpec.h': { desc: 'Type-erased effect specification with builder pattern.', code: 'FEffectSpec Spec = FEffectSpec::Make()\\n  .WithDuration(5.0f)\\n  .WithAdditive(DamageType, 10.0f);' },
             'TypeErasedEffectManager.h': { desc: 'Manages active effects, handles stacking policies and reapplication.', code: 'Manager.ApplyEffect(Target, Spec);\nManager.RemoveEffect(Handle);' },
