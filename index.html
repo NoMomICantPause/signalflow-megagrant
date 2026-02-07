@@ -694,7 +694,7 @@
                 <h2 class="cover-subtitle">High-Performance Reactive Framework for Unreal Engine 5</h2>
                 <p style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 48px;">
                     Functional reactive programming framework with 128-bit cache-aligned signals,
-                    automatic network replication, and 56 Blueprint nodes. Core architecture complete, seeking MegaGrant
+                    automatic network replication, and 66 Blueprint nodes. Core architecture complete, seeking MegaGrant
                     to finalize cross-platform support and documentation.
                 </p>
 
@@ -719,7 +719,7 @@
                 </div>
                 <div class="grid-4">
                     <div class="stat-card">
-                        <span class="stat-number">26</span>
+                        <span class="stat-number">33</span>
                         <span class="stat-label">Automated Test Files</span>
                         <span class="verified">✓ Passing</span>
                     </div>
@@ -729,7 +729,7 @@
                         <span class="verified">✓ Verified</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">56</span>
+                        <span class="stat-number">66</span>
                         <span class="stat-label">Blueprint Nodes</span>
                         <span class="verified">✓ Full API</span>
                     </div>
@@ -1256,7 +1256,7 @@
                                     <li><strong style="color: var(--text-primary);">Auto-Binding:</strong> UI updates
                                         when
                                         data changes - no manual refresh</li>
-                                    <li><strong style="color: var(--text-primary);">13 K2 Nodes:</strong> Full signal
+                                    <li><strong style="color: var(--text-primary);">39 K2 Nodes:</strong> Full signal
                                         control without C++</li>
                                 </ul>
                             </div>
@@ -1370,12 +1370,12 @@
                             <div style="font-size: 0.75rem; color: var(--text-muted);">License</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">37 Tests
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">33 Tests
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-muted);">Automated</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">8 Benchmarks
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">6 Benchmarks
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-muted);">Performance</div>
                         </div>
@@ -1679,15 +1679,16 @@
                                     </td>
                                     <td style="padding: 10px 8px; text-align: center;"><span
                                             style="color: #22c55e;">✅</span></td>
-                                    <td style="padding: 10px 8px; color: var(--text-muted);">TArray/TMap with derived
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">TArray/TSet/TMap with
+                                        derived
                                         signals</td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-color);">
-                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Blueprint Nodes (56)
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Blueprint Nodes (66)
                                     </td>
                                     <td style="padding: 10px 8px; text-align: center;"><span
                                             style="color: #22c55e;">✅</span></td>
-                                    <td style="padding: 10px 8px; color: var(--text-muted);">28 K2Nodes + 28 BP
+                                    <td style="padding: 10px 8px; color: var(--text-muted);">39 K2Nodes + 27 BP
                                         Functions</td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-color);">
@@ -2397,7 +2398,7 @@
                 <div class="section">
                     <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">Blueprint Integration</h2>
                     <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                        <strong style="color: var(--accent-success);">37 K2 Nodes</strong> provide complete
+                        <strong style="color: var(--accent-success);">39 K2 Nodes</strong> provide complete
                         Blueprint-native
                         access to the reactive system:
                     </p>
@@ -2416,19 +2417,18 @@
                         </div>
                         <div class="card">
                             <h4 style="color: var(--accent-info); margin-bottom: 12px;">Collections <span
-                                    class="verified">14
+                                    class="verified">12
                                     nodes</span></h4>
                             <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                                <li>✅ Add / Insert / Remove / RemoveAt</li>
-                                <li>✅ Find / GetAt / Contains / Count</li>
-                                <li>✅ Clear / Swap / UpdateAt</li>
+                                <li>✅ Add / Insert / Remove / UpdateAt</li>
+                                <li>✅ Find / FindSignal / GetAt / GetAtSignal</li>
+                                <li>✅ Contains / ContainsSignal / CountSignal</li>
                                 <li>✅ Execute Collection Query</li>
-                                <li>✅ Watch Collection (reactive)</li>
                             </ul>
                         </div>
                         <div class="card">
-                            <h4 style="color: var(--accent-purple); margin-bottom: 12px;">Watch & Tags <span
-                                    class="verified">6
+                            <h4 style="color: var(--accent-purple); margin-bottom: 12px;">Watch &amp; Tags <span
+                                    class="verified">4
                                     nodes</span></h4>
                             <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
                                 <li>✅ Watch Signal (reactive callback)</li>
@@ -2444,29 +2444,48 @@
                             <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
                                 <li>✅ Signal Math (+, -, *, /, %)</li>
                                 <li>✅ Signal Arithmetic (Pow, Sqrt...)</li>
-                                <li>✅ Signal Comparison (<,>, ==, !=)</li>
+                                <li>✅ Signal Comparison (&lt;,&gt;, ==, !=)</li>
                                 <li>✅ Signal Combine (And, Or, Min, Max)</li>
                                 <li>✅ Apply Pipeline (Smooth, Throttle...)</li>
                                 <li>✅ Signal Cue (GameplayCue trigger)</li>
                             </ul>
                         </div>
                         <div class="card">
-                            <h4 style="color: #ec4899; margin-bottom: 12px;">AttributeFlow <span class="verified">4
+                            <h4 style="color: #ec4899; margin-bottom: 12px;">AttributeFlow <span class="verified">2
                                     nodes</span>
                             </h4>
                             <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
-                                <li>✅ Get Attribute</li>
-                                <li>✅ Set Attribute</li>
                                 <li>✅ Apply Effect</li>
                                 <li>✅ Remove Effect</li>
                             </ul>
                         </div>
                         <div class="card">
-                            <h4 style="color: #64748b; margin-bottom: 12px;">Debug <span class="verified">2 nodes</span>
+                            <h4 style="color: #64748b; margin-bottom: 12px;">Debug <span class="verified">2
+                                    nodes</span>
                             </h4>
                             <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
                                 <li>✅ Signal Print</li>
                                 <li>✅ Watch Signal Print</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 style="color: #f59e0b; margin-bottom: 12px;">Maps <span class="verified">6
+                                    nodes</span>
+                            </h4>
+                            <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                                <li>✅ Map Add / Map Remove</li>
+                                <li>✅ Map Find / Map Contains Key</li>
+                                <li>✅ Map Count / Map Clear</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 style="color: #06b6d4; margin-bottom: 12px;">Sets <span class="verified">5
+                                    nodes</span>
+                            </h4>
+                            <ul style="list-style: none; padding: 0; font-size: 0.8rem; color: var(--text-secondary);">
+                                <li>✅ Set Add / Set Remove</li>
+                                <li>✅ Set Contains / Set Count</li>
+                                <li>✅ Set Clear</li>
                             </ul>
                         </div>
                     </div>
@@ -2778,7 +2797,8 @@
                                 </tr>
                             </table>
                             <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
-                                    class="code-comment">// Parry window setup in AnimMontage</span>
+                                    class="code-comment">//
+                                    Parry window setup in AnimMontage</span>
                                 UPROPERTY() FGameplayTag SignalTag;
                                 UPROPERTY() <span class="code-keyword">bool</span> bInterpolate = <span
                                     class="code-keyword">true</span>;
@@ -2813,7 +2833,8 @@
                                 </tr>
                             </table>
                             <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
-                                    class="code-comment">// Reactive input in 2 lines</span>
+                                    class="code-comment">//
+                                    Reactive input in 2 lines</span>
                                 <span class="code-keyword">auto</span> MoveInput = InputBridge::CreateAxis2DSignal(
                                 InputComp, MoveAction, ETriggerEvent::Triggered);
                                 <span class="code-keyword">auto</span> SmoothedMove = MoveInput | Smooth(0.1f);
@@ -2852,7 +2873,8 @@
                                 </tr>
                             </table>
                             <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
-                                    class="code-comment">// Target selection pipeline</span>
+                                    class="code-comment">//
+                                    Target selection pipeline</span>
                                 <span class="code-keyword">auto</span> Target = TargetingQuery::InRadius(Pos, 1000.f)
                                 .WithLineOfSight(World)
                                 .ClosestTo(Player)
@@ -2892,7 +2914,8 @@
                                 </tr>
                             </table>
                             <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
-                                    class="code-comment">// Trigger VFX/SFX on damage</span>
+                                    class="code-comment">//
+                                    Trigger VFX/SFX on damage</span>
                                 Damage | Cue(DamageNumberTag, World);
                                 Health | Cue(LowHealthWarningTag, World,
                                 FSignalCueOptions().Cooldown(2.0f));</div>
@@ -2928,7 +2951,8 @@
                                 </tr>
                             </table>
                             <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
-                                    class="code-comment">// LINQ-style signal query</span>
+                                    class="code-comment">//
+                                    LINQ-style signal query</span>
                                 <span class="code-keyword">float</span> TotalDamage = SignalQuery::All()
                                 .WithFlags(ESignalFlags::Damage)
                                 .InRadius(Center, 500.f, Spatial)
@@ -2969,7 +2993,8 @@
                                 </tr>
                             </table>
                             <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
-                                    class="code-comment">// Persistent signal - one flag</span>
+                                    class="code-comment">//
+                                    Persistent signal - one flag</span>
                                 <span class="code-keyword">auto</span> Currency = Signal(1000, <span
                                     class="code-string">"Player.Gold"</span>,
                                 ESignalFlags::Replicated | ESignalFlags::Save);
@@ -2997,7 +3022,7 @@
                 <div class="section">
                     <h1 class="section-title">Performance Benchmarks</h1>
                     <p class="section-subtitle">
-                        8 automated benchmarks verify performance characteristics. Data from real hardware testing.
+                        6 automated benchmarks verify performance characteristics. Data from real hardware testing.
                     </p>
 
                     <div class="grid-2">
@@ -3375,7 +3400,7 @@
                 <div class="section">
                     <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">Test Coverage</h2>
                     <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                        37 test files covering all major subsystems:
+                        33 test files covering all major subsystems:
                     </p>
                     <div class="grid-4">
                         <div class="card" style="text-align: center;">
@@ -3430,10 +3455,10 @@
                             <ul
                                 style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--text-secondary);">
                                 <li>✅ Type-erased AttributeFlow effect system</li>
-                                <li>✅ 13 Blueprint K2 nodes</li>
+                                <li>✅ 39 Blueprint K2 nodes</li>
                                 <li>✅ Persistence system (LZ4 + Delta + CRC32)</li>
                                 <li>✅ Client prediction framework</li>
-                                <li>✅ 26 tests, 6 benchmarks</li>
+                                <li>✅ 33 tests, 6 benchmarks</li>
                             </ul>
                         </div>
                     </div>
@@ -3720,7 +3745,7 @@
                             stroke-width="2" />
                         <text x="640" y="300" text-anchor="middle" fill="#06b6d4" font-size="14"
                             font-weight="bold">BLUEPRINT</text>
-                        <text x="640" y="330" text-anchor="middle" fill="#94a3b8" font-size="11">13 K2Nodes +
+                        <text x="640" y="330" text-anchor="middle" fill="#94a3b8" font-size="11">39 K2Nodes +
                             Library</text>
                         <!-- Core -> Storage & AttributeFlow -->
                         <path d="M 220 130 L 220 160" stroke="#64748b" stroke-width="2" marker-end="url(#arr3)" />
@@ -4049,7 +4074,7 @@
                     { name: "TypeErasedModifier.h", type: "h", description: "FTypeErasedModifier with source handle, operation, and magnitude. Stacking count support via ScalarMul for aggregate effects." },
                     { name: "ExecutionCalc.h", type: "h", description: "USignalExecutionCalculation base class. Override Execute() for custom damage formulas. Accesses source/target FSignalSet." },
                     { name: "EffectSpec.h", type: "h", description: "TEffectSpec<T> typed wrapper over type-erased spec. Compile-time type safety with runtime type-erased execution." },
-                    { name: "CollectionSignal.h", type: "h", description: "TCollectionSignal<TArray<T>> and TCollectionSignal<TMap<K,V>>. Reactive containers notifying on Add/Remove/Clear." },
+                    { name: "CollectionSignal.h", type: "h", description: "TCollectionSignal<TArray<T>>, TSetSignal<T>, and TMapSignal<K,V>. Reactive containers notifying on Add/Remove/Clear with granular deltas." },
                     { name: "AttributeFlowBlueprintLibrary.h", type: "h", description: "UAttributeFlowBlueprintLibrary with Blueprint-exposed attribute getters/setters and effect management functions." }
                 ]
             },
@@ -4144,7 +4169,7 @@
             blueprint: {
                 name: "Blueprint Integration",
                 color: "#06b6d4",
-                description: "33 K2Nodes + 4 Blueprint Functions exposing SignalFlow to Blueprint. K2Nodes handle wildcard types and reactive exec pins. Simple collection ops (Count, Clear, RemoveAt, Swap) exposed as direct Blueprint Functions.",
+                description: "39 K2Nodes + 27 Blueprint Functions exposing SignalFlow to Blueprint. K2Nodes handle wildcard types and reactive exec pins. Includes 11 Set/Map K2Nodes for TSet and TMap CRUD. Simple collection ops exposed as direct Blueprint Functions.",
                 files: [
                     { name: "K2Node_CreateSignal.h", type: "h", description: "Create Signal node with type selector pin. Outputs FSignalHandle. Supports default value input." },
                     { name: "K2Node_GetSignalValue.h", type: "h", description: "Get Signal Value with auto-typed output pin based on connected signal. Registers dependency for Computed signals." },
@@ -4159,7 +4184,7 @@
             tests: {
                 name: "Test Suite",
                 color: "#c9a96e",
-                description: "26 automated test files + 6 benchmarks validating all subsystems. Covers core signals, operators, replication, spatial, targeting, persistence, audio, bridges, and more.",
+                description: "33 automated test files + 6 benchmarks validating all subsystems. Covers core signals, operators, replication, spatial, targeting, persistence, audio, bridges, and more.",
                 files: [
                     { name: "SignalFlowTest.cpp", type: "cpp", description: "Core signal creation, Value/SetValue roundtrip, observer notification, dependency tracking." },
                     { name: "SignalFlowPortedFeaturesTest.cpp", type: "cpp", description: "Ported Reactivo features validation: computed signals, operators, chaining." },
@@ -4208,11 +4233,15 @@
             collections: {
                 name: "Reactive Collections",
                 color: "#22d3ee",
-                description: "Observable array signals with O(1) granular updates. TCollectionSignal<T> notifies only changed indices on Add/Remove/Update. 16 Blueprint K2Nodes for CRUD and reactive watching. Powers efficient UI lists without full-array diff.",
+                description: "Observable container signals (TArray, TSet, TMap) with O(1) granular updates. TCollectionSignal<T> notifies only changed indices. TSetSignal<T> and TMapSignal<K,V> provide value-based and key-based delta tracking. 27 Blueprint K2Nodes for CRUD and reactive watching.",
                 files: [
                     { name: "CollectionSignal.h", type: "h", description: "TCollectionSignal<T> with Add(), RemoveAt(), UpdateAt(), Clear(). O(1) granular notifications. Map<U>(func) creates incremental mapped signal." },
-                    { name: "CollectionTypes.h", type: "h", description: "FCollectionChangeEvent: Operation enum (Add/Remove/Update/Clear), Index, optional OldValue. Batch mode for multi-op transactions." },
-                    { name: "CollectionSignalBehavior.h", type: "h", description: "TCollectionSignalBehavior<T> backing granular updates. Maintains parallel ChangeHistory for delta propagation." },
+                    { name: "CollectionTypes.h", type: "h", description: "FCollectionChangeEvent, FSetDelta<T>, FMapDelta<K,V>: Operation enums for Add/Remove/Update/Clear with optional OldValue. Batch mode for multi-op transactions." },
+                    { name: "CollectionSignalBehavior.h", type: "h", description: "TCollectionSignalBehavior<T> backing TArray granular updates. Maintains parallel ChangeHistory for delta propagation." },
+                    { name: "SetSignalBehavior.h", type: "h", description: "TSetSignalBehavior<T> for TSet containers. Shard-based ECS storage with FSetDelta tracking. Add/Remove/Clear with versioned history." },
+                    { name: "SetSignal.h", type: "h", description: "TSetSignal<T> wrapper over TSetSignalBehavior. Add(), Remove(), Contains(), Clear(). Value-based deltas (no indices)." },
+                    { name: "MapSignalBehavior.h", type: "h", description: "TMapSignalBehavior<K,V> for TMap containers. Shard-based ECS storage with FMapDelta tracking. Add/Remove/Clear with versioned history." },
+                    { name: "MapSignal.h", type: "h", description: "TMapSignal<K,V> wrapper over TMapSignalBehavior. Add(), Remove(), Find(), Contains(). Key-based deltas." },
                     { name: "CollectionView.h", type: "h", description: "Read-only filtered/sorted view over collection. Lazily computed, caches result until source changes." },
                     { name: "CollectionQueryAsset.h", type: "h", description: "UCollectionQueryAsset for Blueprint-defined queries. Where/OrderBy/Take chains serialized as DataAsset." },
                     { name: "K2Node_CollectionAdd.h", type: "h", description: "Blueprint Add node. Appends item, returns new index. Triggers WatchCollectionCount subscribers." },
@@ -4230,7 +4259,18 @@
                     { name: "K2Node_WatchCollectionGetAt.h", type: "h", description: "Reactive 'slot pointer'. Fires when item at index changes or is removed." },
                     { name: "K2Node_WatchCollectionContains.h", type: "h", description: "Reactive bool signal. Fires when target value is added/removed." },
                     { name: "K2Node_WatchCollectionFind.h", type: "h", description: "Reactive index signal. Fires when target value's index changes." },
-                    { name: "K2Node_ExecuteCollectionQuery.h", type: "h", description: "Execute UCollectionQueryAsset. Returns filtered/sorted TArray snapshot." }
+                    { name: "K2Node_ExecuteCollectionQuery.h", type: "h", description: "Execute UCollectionQueryAsset. Returns filtered/sorted TArray snapshot." },
+                    { name: "K2Node_SetAdd.h", type: "h", description: "Blueprint Set Add with wildcard element type. Adds item to TSetSignal." },
+                    { name: "K2Node_SetRemove.h", type: "h", description: "Blueprint Set Remove. Removes item from TSetSignal by value." },
+                    { name: "K2Node_SetContains.h", type: "h", description: "Blueprint Set Contains. Returns bool for membership test." },
+                    { name: "K2Node_SetCount.h", type: "h", description: "Blueprint Set Count. Returns int32 element count." },
+                    { name: "K2Node_SetClear.h", type: "h", description: "Blueprint Set Clear. Removes all elements with single Reset delta." },
+                    { name: "K2Node_MapAdd.h", type: "h", description: "Blueprint Map Add with wildcard key/value types. Emits Add or Update delta." },
+                    { name: "K2Node_MapRemove.h", type: "h", description: "Blueprint Map Remove by key. Emits Remove delta." },
+                    { name: "K2Node_MapFind.h", type: "h", description: "Blueprint Map Find. Returns value for key or default." },
+                    { name: "K2Node_MapContainsKey.h", type: "h", description: "Blueprint Map Contains Key. Returns bool." },
+                    { name: "K2Node_MapCount.h", type: "h", description: "Blueprint Map Count. Returns int32 entry count." },
+                    { name: "K2Node_MapClear.h", type: "h", description: "Blueprint Map Clear. Removes all entries with single Reset delta." }
                 ]
             }
         };
