@@ -719,12 +719,12 @@
                 </div>
                 <div class="grid-4">
                     <div class="stat-card">
-                        <span class="stat-number">33</span>
-                        <span class="stat-label">Automated Test Files</span>
+                        <span class="stat-number">209</span>
+                        <span class="stat-label">Automated Tests</span>
                         <span class="verified">✓ Passing</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">6</span>
+                        <span class="stat-number">11</span>
                         <span class="stat-label">Performance Benchmarks</span>
                         <span class="verified">✓ Verified</span>
                     </div>
@@ -1370,12 +1370,12 @@
                             <div style="font-size: 0.75rem; color: var(--text-muted);">License</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">33 Tests
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">209 Tests
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-muted);">Automated</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">6 Benchmarks
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">11 Benchmarks
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-muted);">Performance</div>
                         </div>
@@ -3092,7 +3092,8 @@
                 <div class="section">
                     <h1 class="section-title">Performance Benchmarks</h1>
                     <p class="section-subtitle">
-                        6 automated benchmarks verify performance characteristics. Data from real hardware testing.
+                        11 automated benchmarks verify performance characteristics across 6 files. Data from real
+                        hardware testing.
                     </p>
 
                     <div class="grid-2">
@@ -3135,7 +3136,7 @@
                 <div class="section">
                     <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;">
                         <h2 style="font-size: 1.5rem; font-weight: 700;">Verified Benchmark Data</h2>
-                        <span style="color: var(--text-muted); font-size: 0.75rem;">All data captured January 2026,
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">All data captured February 2026,
                             Development Build, UE 5.7</span>
                     </div>
 
@@ -3432,7 +3433,7 @@
                         <img src="img/benchmark_results.png" alt="Benchmark Results"
                             style="width: 100%; border-radius: 8px; border: 1px solid var(--border-subtle);">
                         <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 8px;">
-                            Benchmark Results from Unreal Automation - January 2026</p>
+                            Benchmark Results from Unreal Automation - February 2026</p>
                     </div>
 
                     <div style="margin: 24px 0;">
@@ -3528,7 +3529,7 @@
                                 <li>✅ 39 Blueprint K2 nodes</li>
                                 <li>✅ Persistence system (LZ4 + Delta + CRC32)</li>
                                 <li>✅ Client prediction framework</li>
-                                <li>✅ 33 tests, 6 benchmarks</li>
+                                <li>✅ 209 tests + 11 benchmarks (220 total) — 100% Doxygen</li>
                             </ul>
                         </div>
                     </div>
@@ -4256,7 +4257,7 @@
             tests: {
                 name: "Test Suite",
                 color: "#c9a96e",
-                description: "33 automated test files + 6 benchmarks validating all subsystems. Covers core signals, operators, replication, spatial, targeting, persistence, audio, bridges, and more.",
+                description: "209 automated tests + 11 benchmarks (220 total) across 33 files. 100% Doxygen documentation coverage (@file/@brief/@section WHAT/WHY/DEPS). Covers core signals, operators, replication, spatial, targeting, persistence, prediction, audio, bridges, binding, behaviors, safety, and concurrency.",
                 files: [
                     { name: "SignalFlowTest.cpp", type: "cpp", description: "Core signal creation, Value/SetValue roundtrip, observer notification, dependency tracking." },
                     { name: "SignalFlowPortedFeaturesTest.cpp", type: "cpp", description: "Ported Reactivo features validation: computed signals, operators, chaining." },
@@ -4283,6 +4284,15 @@
                     { name: "SafetyTest.cpp", type: "cpp", description: "Null handle protection, weak pointer validation, error recovery." },
                     { name: "AsSignalTest.cpp", type: "cpp", description: "Unit tests for AsSignal conversion operators." },
                     { name: "TransientTest.cpp", type: "cpp", description: "Unit tests for transient value store." },
+                    { name: "ContainerSignalsTest.cpp", type: "cpp", description: "TSignalMap and TSignalSet: create, contains, remove, update, clear, empty lookups, type generality." },
+                    { name: "ReactiveOperatorsTest.cpp", type: "cpp", description: "When, WithPrevious, OnTransition, Cooldown, Gate reactive operator tests." },
+                    { name: "TransformLogicMutableTest.cpp", type: "cpp", description: "Clamp, Lerp, Smooth, AND/OR/NOT, Watch, CompoundAssignment operator tests." },
+                    { name: "SpatialEdgeCasesTest.cpp", type: "cpp", description: "Re-register lifecycle, same-position entities, zero-radius query, unregister non-existent." },
+                    { name: "ConcurrencyTest.cpp", type: "cpp", description: "ParallelFor stress: concurrent SetValue, timer queue, simultaneous read/write." },
+                    { name: "AbilityReactiveTest.cpp", type: "cpp", description: "Ability cooldown cycle, reset, charge restoration with mock time source." },
+                    { name: "EffectReactiveTest.cpp", type: "cpp", description: "Effect expiration, periodic tick, expired modifier cleanup with deterministic time." },
+                    { name: "BehaviorTests.cpp", type: "cpp", description: "Smooth, Filter, Scan, Distinct, Do, Map behaviors with chaining tests." },
+                    { name: "BindingBridgeTest.cpp", type: "cpp", description: "Property converter registry, type registration, null-safe factory creation." },
                     { name: "TestGameplayTags.cpp", type: "cpp", description: "GameplayTag registration and lookup for tests." },
                     { name: "Benchmark_Core.cpp", type: "cpp", description: "100K signal creation throughput. Target: <50ms." },
                     { name: "Benchmark_AttributeFlow.cpp", type: "cpp", description: "FSignalSet and effect application performance." },
