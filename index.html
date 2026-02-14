@@ -694,7 +694,7 @@
                 <h2 class="cover-subtitle">High-Performance Reactive Framework for Unreal Engine 5</h2>
                 <p style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 48px;">
                     Functional reactive programming framework with 128-bit cache-aligned signals,
-                    automatic network replication, and 164 Blueprint nodes. Core architecture complete, seeking
+                    automatic network replication, and 174 Blueprint nodes. Core architecture complete, seeking
                     MegaGrant
                     to finalize cross-platform support and documentation.
                 </p>
@@ -720,7 +720,7 @@
                 </div>
                 <div class="grid-4">
                     <div class="stat-card">
-                        <span class="stat-number">385</span>
+                        <span class="stat-number">395</span>
                         <span class="stat-label">Automated Tests</span>
                         <span class="verified">✓ Passing</span>
                     </div>
@@ -730,7 +730,7 @@
                         <span class="verified">✓ Verified</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">164</span>
+                        <span class="stat-number">174</span>
                         <span class="stat-label">Blueprint Nodes</span>
                         <span class="verified">✓ Full API</span>
                     </div>
@@ -1772,7 +1772,7 @@
                             <div style="font-size: 0.75rem; color: var(--text-muted);">License</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">385 Tests
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">395 Tests
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-muted);">Automated</div>
                         </div>
@@ -2086,7 +2086,7 @@
                                         signals</td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-color);">
-                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Blueprint Nodes (164)
+                                    <td style="padding: 10px 8px; color: var(--text-secondary);">Blueprint Nodes (174)
                                     </td>
                                     <td style="padding: 10px 8px; text-align: center;"><span
                                             style="color: #22c55e;">✅</span></td>
@@ -3236,7 +3236,8 @@
                     <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;">🔧 Advanced Integration Systems
                     </h2>
                     <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">
-                        Production-ready bridges for Animation, Input, Audio, Spatial queries, and more.
+                        Production-ready bridges for Animation, Input, Audio, Spatial queries, EOS online services, and
+                        more.
                     </p>
 
                     <div class="grid-2" style="gap: 20px;">
@@ -3472,6 +3473,47 @@
                                 ESignalFlags::Replicated | ESignalFlags::Save);
                                 <span class="code-comment">// Value persists across sessions</span>
                             </div>
+                        </div>
+
+                        <!-- EOS Online Services -->
+                        <div class="card" style="border-left: 4px solid #f59e0b;">
+                            <h4 style="color: #f59e0b; margin-bottom: 16px; font-size: 0.9rem;">
+                                🌐 EOS Online Services <span class="verified">✓ v1.0</span>
+                            </h4>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 12px;">
+                                SDK-agnostic bridge for live-service Stats ingestion and session-scoped replication.
+                            </p>
+                            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                        FSignalToEOSStat</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Single signal → stat push
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                        FBatchSignalToEOSStat</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Group batch ingestion
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                        FSignalSessionManager</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Session lifecycle
+                                        coordinator</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: var(--text-primary); font-weight: 500;">
+                                        IEOSStatSink</td>
+                                    <td style="padding: 8px 0; color: var(--text-secondary);">Abstract transport
+                                        (EOS/Steam/Custom)</td>
+                                </tr>
+                            </table>
+                            <div class="code-snippet" style="font-size: 0.7rem; margin-top: 12px;"><span
+                                    class="code-comment">// Session-scoped replication in 3 lines</span>
+                                SM.CreateSession(<span class="code-string">"Lobby_ABC"</span>);
+                                SM.PlayerJoined(<span class="code-string">"Lobby_ABC"</span>, PS);
+                                SM.RegisterSignal(<span class="code-string">"Lobby_ABC"</span>, HP);</div>
                         </div>
                     </div>
 
@@ -3932,13 +3974,13 @@
                             </ul>
                             <ul
                                 style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--text-secondary);">
-                                <li>✅ 42 Blueprint K2 nodes + 122 BP Functions</li>
+                                <li>✅ 42 Blueprint K2 nodes + 132 BP Functions</li>
                                 <li>✅ Persistence system (LZ4 + Delta + CRC32)</li>
                                 <li>✅ Client prediction framework</li>
                                 <li>✅ Engine bridges (Animation, Input, Audio, Haptics, Material)</li>
                                 <li>✅ Niagara NDI & Mass Entity (DenseMirror) bridges</li>
                                 <li>✅ UI binding system (PropertyBridge, BindingComponent)</li>
-                                <li>✅ 385 tests + 13 benchmarks (398 total) — 100% Doxygen</li>
+                                <li>✅ 395 tests + 13 benchmarks (408 total) — 100% Doxygen</li>
                             </ul>
                         </div>
                     </div>
@@ -4716,10 +4758,27 @@
                     { name: "TPredictOperator.h", type: "h", description: "TPredictOperator<T>: operator-style prediction. Pipes predicted value through signal graph with automatic rollback on misprediction." }
                 ]
             },
+            eos: {
+                name: "EOS Online Services",
+                color: "#f59e0b",
+                description: "SDK-agnostic bridge for live-service stat ingestion and session-scoped replication. IEOSStatSink provides abstract transport. FSignalSessionManager automates FSignalGroups lifecycle for lobby/session events.",
+                files: [
+                    { name: "SignalToEOSStat.h", type: "h", description: "IEOSStatSink abstract interface, FSignalStatMapping, FSignalToEOSStat (single push), FBatchSignalToEOSStat (group batch). SDK-agnostic transport layer." },
+                    { name: "SignalToEOSStat.cpp", type: "cpp", description: "Push implementations with tag key resolution. Batch collects all group signals, filters non-tag keys, calls IngestStatBatch." },
+                    { name: "SignalSessionManager.h", type: "h", description: "FSignalSessionManager singleton. CreateSession/DestroySession lifecycle, PlayerJoined/Left entity membership, RegisterSignal for group-scoped replication." },
+                    { name: "SignalSessionManager.cpp", type: "cpp", description: "Session lifecycle: creates/destroys FSignalGroups, manages entity membership via AddEntity/RemoveEntity, validates all inputs with warnings." },
+                    { name: "EOSBridgeBlueprintLibrary.h", type: "h", description: "USignalStatSinkInterface (UInterface), FUObjectStatSinkAdapter bridge, UEOSBridgeBlueprintLibrary with 10 BP functions across Stats and Sessions categories." },
+                    { name: "EOSBridgeBlueprintLibrary.cpp", type: "cpp", description: "BP function implementations. Stats delegates to FSignalToEOSStat/FBatchSignalToEOSStat. Sessions delegates to FSignalSessionManager singleton." },
+                    { name: "SignalToEOSStatTest.cpp", type: "cpp", description: "5 stats tests: SingleStatPush, BatchPush, NonTagKeySkip, EmptyGroup, InvalidHandlePush. Uses FMockStatSink." },
+                    { name: "SignalSessionManagerTest.cpp", type: "cpp", description: "5 session tests: CreateDestroy, PlayerJoinLeave, RegisterSignalToSession, DestroySessionCleansAll, DuplicateSessionWarning." },
+                    { name: "SignalFlowEOS.Build.cs", type: "cs", description: "Module build rules. Depends on SignalFlowLite. PCH disabled for fast iteration." },
+                    { name: "SignalFlowEOSModule.cpp", type: "cpp", description: "IModuleInterface implementation. Default startup/shutdown." }
+                ]
+            },
             blueprint: {
                 name: "Blueprint Integration",
                 color: "#06b6d4",
-                description: "42 K2Nodes + 122 Blueprint Library Functions (164 total) exposing SignalFlow to Blueprint. K2Nodes handle wildcard types via UK2Node_WildcardValue base class. Includes 11 Collection, 5 Set, 6 Map, 6 Operator, 2 Debug, 2 Effect, 1 Query, 1 Spatial K2Nodes. 3 Blueprint Libraries: SignalFlowBlueprintLibrary (96), AttributeFlowBlueprintLibrary (15), SignalSpatialBlueprintLibrary (11).",
+                description: "42 K2Nodes + 132 Blueprint Library Functions (174 total) exposing SignalFlow to Blueprint. K2Nodes handle wildcard types via UK2Node_WildcardValue base class. Includes 11 Collection, 5 Set, 6 Map, 6 Operator, 2 Debug, 2 Effect, 1 Query, 1 Spatial K2Nodes. 4 Blueprint Libraries: SignalFlowBlueprintLibrary (96), AttributeFlowBlueprintLibrary (15), SignalSpatialBlueprintLibrary (11), EOSBridgeBlueprintLibrary (10).",
                 files: [
                     { name: "K2Node_CreateSignal.h", type: "h", description: "Create Signal node with type selector pin. Outputs FSignalHandle. Supports default value input." },
                     { name: "K2Node_GetSignalValue.h", type: "h", description: "Get Signal Value with auto-typed output pin based on connected signal. Registers dependency for Computed signals." },
@@ -4750,7 +4809,7 @@
             tests: {
                 name: "Test Suite",
                 color: "#c9a96e",
-                description: "385 automated tests + 13 benchmarks (398 total) across 66 files. 100% Doxygen documentation coverage (@file/@brief/@section WHAT/WHY/DEPS). Covers core signals, operators, replication, spatial, targeting, persistence, prediction, audio, bridges, binding, behaviors, safety, and concurrency.",
+                description: "395 automated tests + 13 benchmarks (408 total) across 66 files. 100% Doxygen documentation coverage (@file/@brief/@section WHAT/WHY/DEPS). Covers core signals, operators, replication, spatial, targeting, persistence, prediction, audio, bridges, binding, behaviors, safety, EOS, and concurrency.",
                 files: [
                     { name: "SignalFlowTest.cpp", type: "cpp", description: "Core signal creation, Value/SetValue roundtrip, observer notification, dependency tracking." },
                     { name: "SignalFlowPortedFeaturesTest.cpp", type: "cpp", description: "Ported Reactivo features validation: computed signals, operators, chaining." },
@@ -5072,7 +5131,8 @@
                 'collections': ['signals'],                   // Collections are reactive arrays built on signals
                 'prediction': ['signals', 'replication'],    // Prediction extends replication
                 'blueprint': ['signals', 'attributeflow', 'core', 'collections'],  // Blueprint exposes signals + AttributeFlow + Collections
-                'tests': ['core', 'signals', 'attributeflow', 'collections'] // Tests verify all systems
+                'tests': ['core', 'signals', 'attributeflow', 'collections'], // Tests verify all systems
+                'eos': ['signals', 'core', 'replication']                    // EOS bridge uses signals, core, replication groups
             };
             Object.keys(data).forEach(src => {
                 if (deps[src]) deps[src].forEach(tgt => { if (data[tgt]) links.push({ source: src, target: tgt, type: 'dep' }); });
